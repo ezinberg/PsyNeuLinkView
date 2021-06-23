@@ -1,0 +1,318 @@
+{
+  "edges": [
+    {
+      "_draw_": [
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "op": "b",
+          "points": [
+            [
+              83.09,
+              36.17
+            ],
+            [
+              83.09,
+              43.87
+            ],
+            [
+              83.09,
+              53.03
+            ],
+            [
+              83.09,
+              61.58
+            ]
+          ]
+        }
+      ],
+      "_gvid": 0,
+      "_hdraw_": [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "C"
+        },
+        {
+          "op": "P",
+          "points": [
+            [
+              79.59,
+              61.59
+            ],
+            [
+              83.09,
+              71.59
+            ],
+            [
+              86.59,
+              61.59
+            ]
+          ]
+        }
+      ],
+      "arrowhead": "normal",
+      "color": "black",
+      "fontname": "arial",
+      "fontsize": "10",
+      "head": 1,
+      "label": "",
+      "penwidth": "1",
+      "pos": "e,83.093,71.587 83.093,36.169 83.093,43.869 83.093,53.026 83.093,61.583",
+      "tail": 0
+    },
+    {
+      "_draw_": [
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "op": "b",
+          "points": [
+            [
+              83.09,
+              108.17
+            ],
+            [
+              83.09,
+              115.87
+            ],
+            [
+              83.09,
+              125.03
+            ],
+            [
+              83.09,
+              133.58
+            ]
+          ]
+        }
+      ],
+      "_gvid": 1,
+      "_hdraw_": [
+        {
+          "op": "S",
+          "style": "solid"
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "C"
+        },
+        {
+          "op": "P",
+          "points": [
+            [
+              79.59,
+              133.59
+            ],
+            [
+              83.09,
+              143.59
+            ],
+            [
+              86.59,
+              133.59
+            ]
+          ]
+        }
+      ],
+      "arrowhead": "normal",
+      "color": "black",
+      "fontname": "arial",
+      "fontsize": "10",
+      "head": 2,
+      "label": "",
+      "penwidth": "1",
+      "pos": "e,83.093,143.59 83.093,108.17 83.093,115.87 83.093,125.03 83.093,133.58",
+      "tail": 1
+    }
+  ],
+  "maxX": 103.86625000000001,
+  "maxY": 202.5,
+  "objects": [
+    {
+      "_draw_": [
+        {
+          "op": "S",
+          "style": "setlinewidth(3)"
+        },
+        {
+          "color": "#00ff00",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "op": "e",
+          "rect": [
+            83.09,
+            18.0,
+            83.19,
+            18.0
+          ]
+        }
+      ],
+      "_gvid": 0,
+      "_ldraw_": [
+        {
+          "face": "arial",
+          "op": "F",
+          "size": 12.0
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "align": "c",
+          "op": "T",
+          "pt": [
+            83.09,
+            15.3
+          ],
+          "text": "TransferMechanism-0",
+          "width": 116.26
+        }
+      ],
+      "color": "green",
+      "fontname": "arial",
+      "fontsize": "12",
+      "height": "0.5",
+      "label": "\\N",
+      "name": "TransferMechanism-0",
+      "penwidth": "3",
+      "pos": "83.093,18",
+      "rank": "source",
+      "shape": "oval",
+      "width": "2.3081"
+    },
+    {
+      "_draw_": [
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "op": "e",
+          "rect": [
+            83.09,
+            90.0,
+            83.19,
+            18.0
+          ]
+        }
+      ],
+      "_gvid": 1,
+      "_ldraw_": [
+        {
+          "face": "arial",
+          "op": "F",
+          "size": 12.0
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "align": "c",
+          "op": "T",
+          "pt": [
+            83.09,
+            87.3
+          ],
+          "text": "TransferMechanism-1",
+          "width": 116.26
+        }
+      ],
+      "color": "black",
+      "fontname": "arial",
+      "fontsize": "12",
+      "height": "0.5",
+      "label": "\\N",
+      "name": "TransferMechanism-1",
+      "penwidth": "1",
+      "pos": "83.093,90",
+      "rank": "same",
+      "shape": "oval",
+      "width": "2.3081"
+    },
+    {
+      "_draw_": [
+        {
+          "op": "S",
+          "style": "setlinewidth(3)"
+        },
+        {
+          "color": "#ff0000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "op": "e",
+          "rect": [
+            83.09,
+            162.0,
+            83.19,
+            18.0
+          ]
+        }
+      ],
+      "_gvid": 2,
+      "_ldraw_": [
+        {
+          "face": "arial",
+          "op": "F",
+          "size": 12.0
+        },
+        {
+          "color": "#000000",
+          "grad": "none",
+          "op": "c"
+        },
+        {
+          "align": "c",
+          "op": "T",
+          "pt": [
+            83.09,
+            159.3
+          ],
+          "text": "TransferMechanism-2",
+          "width": 116.26
+        }
+      ],
+      "color": "red",
+      "fontname": "arial",
+      "fontsize": "12",
+      "height": "0.5",
+      "label": "\\N",
+      "name": "TransferMechanism-2",
+      "penwidth": "3",
+      "pos": "83.093,162",
+      "rank": "max",
+      "shape": "oval",
+      "width": "2.3081"
+    }
+  ]
+}

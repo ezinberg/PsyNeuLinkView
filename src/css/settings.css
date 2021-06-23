@@ -1,0 +1,59 @@
+
+
+.bp3-tree.config_tree {
+    background-color: white;
+    /*border-radius: 8px;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+}
+
+.config_tree .bp3-tree-node {
+    border-bottom-style: solid;
+    border-bottom-color: silver;
+    border-bottom-width: 1px;
+}
+
+.bp3-dialog-header {
+    min-height: 30px;
+}
+
+.bp3-dialog {
+    background-color: #f9f3e8;
+    border-radius: 0px;
+}
+
+.bp3-dialog.settings-dialog{
+    padding-bottom: 5px;
+}
+
+button.bp3-button.settings_button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 20px;
+    min-width: 80px;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bp3-editable-text {
+    width: 100%
+}
+
+.options_panel {
+    background-color: white;
+    /*border-radius: 8px;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+}
+
+.options_grid {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
