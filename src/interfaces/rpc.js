@@ -1,3 +1,4 @@
+const { time } = require('console');
 const log = require('electron-log'),
     grpc = require('@grpc/grpc-js'),
     protoloader = require('@grpc/proto-loader'),
@@ -31,6 +32,8 @@ class RPCInterface{
         this.load_script = this.load_script.bind(this);
         this.get_json = this.get_json.bind(this);
         this.load_custom_pnl = this.load_custom_pnl.bind(this);
+
+        this.deepPrintObj = this.deepPrintObj.bind(this);
     }
 
     instantiate_client() {
@@ -38,6 +41,19 @@ class RPCInterface{
             'localhost:50051',
             grpc.credentials.createInsecure()
         );
+    }
+
+    deepPrintObj(obj) {
+        
+        for (var prop in obj) {
+            if (typeof(obj[prop]) !== "object") {
+                console.log(prop + ": " + obj[prop]);
+            }
+            else {
+                console.log("printing props of " + prop + ": " + obj[prop])
+                this.deepPrintObj(obj[prop]);
+            }
+        } 
     }
 
     get_parameters(name, callback = function () {}){
@@ -176,6 +192,85 @@ class RPCInterface{
         })
     }
 
+    // created to attempt running comp by spawning child process
+    // bypass rpc completely
+    // run_composition_spawn(
+    //     inputs,
+    //     servePrefs
+    //     ) {
+    //     var formatted_inputs = {};
+    //     Object.keys(inputs).forEach(
+    //         function (k) {
+    //             var data = inputs[k],
+    //                 rows = data.length,
+    //                 cols = data[0].length,
+    //                 flattened_data = data.flat(Infinity);
+    //             Object.assign(formatted_inputs,
+    //                 {
+    //                     [k]: {
+    //                         rows: rows,
+    //                         cols: cols,
+    //                         data: flattened_data
+    //                     }
+    //                 }
+    //             )
+    //         }
+    //     );
+    //     console.log(formatted_inputs, servePrefs);
+        
+    //     // var child = spawnSync();
+
+
+
+    //     call.on('readable', () => {
+    //         var entry = call.read();
+    //         // while (entry === null) {
+    //         //     entry = call.read();
+    //         // }
+    //         if (entry !== null) {
+    //             console.log("call.on('readable') triggered with entry: " + entry);
+    //             efs.sendMessage('runData', entry);
+    //             self.got_data = true;
+    //         }
+    //         else {
+    //             console.log("call.on('readable') entry is null");
+    //         }
+            
+    //     });
+
+
+    //     call.on('data', function (entry) {
+    //         console.log("call.on('data') triggered with entry: " + entry);
+    //         efs.sendMessage('runData', entry);
+    //         self.got_data = true
+    //     });
+
+    //     call.on('error', function(e) {
+    //         // An error has occurred and the stream has been closed.
+    //         console.log("RPC error: " + e);
+    //       });
+        
+    //     call.on('status', function(st) {
+    //         console.log("status: " + st);
+    //         // this.deepPrintObj(st);
+    //     });
+
+    //     call.on('end', function() {
+    //         console.log("RPC stream end");
+    //         }); 
+
+    //     // for (var entry in call) {
+    //     //     efs.sendMessage('runData', entry);
+    //     //     self.got_data = true
+    //     // }
+    //     // console.log("call:");
+    //     // this.deepPrintObj(call);
+
+
+    // }
+
+
+
     run_composition(
         inputs,
         servePrefs,
@@ -210,25 +305,75 @@ class RPCInterface{
                 servePrefs: {servePrefSet: servePrefs}
             }
         );
-        console.log("before call.on('data')");
+
+        // var reader = call.getReader();
+        // console.log("reader: " +  reader);
+
+        // console.time("t");
+
+        // console.log("typeof(call): " + typeof(call));
+        // console.log("before call.on('data')");
         
         // console.log("call.next(): " + call.next());
 
+        // call.on('data', function (entry) {
+        //     console.log("call.on('data') triggered with entry: " + console.log(entry));
+        //     efs.sendMessage('runData', entry);
+        //     self.got_data = true
+        // });
+
+        // call.on('error', function(e) {
+        //     // An error has occurred and the stream has been closed.
+        //     console.log("RPC error");
+        //   });
+
+        // call.on('end', function() {
+        //     console.timeLog("t");
+        //     console.log("RPC stream end");
+        //     });
+
+        // call.on('readable', () => {
+        //     var entry = call.read();
+        //     // while (entry === null) {
+        //     //     entry = call.read();
+        //     // }
+        //     if (entry !== null) {
+        //         console.log("call.on('readable') triggered with entry: " + entry);
+        //         efs.sendMessage('runData', entry);
+        //         self.got_data = true;
+        //     }
+        //     else {
+        //         console.log("call.on('readable') entry is null");
+        //     }
+            
+        // });
+
         call.on('data', function (entry) {
-            console.log("call.on('data') triggered");
+            console.log("call.on('data') triggered with entry: " + entry);
             efs.sendMessage('runData', entry);
             self.got_data = true
-        })
+        });
+
+        call.on('error', function(e) {
+            // An error has occurred and the stream has been closed.
+            console.log("RPC error: " + e);
+          });
+        
+        call.on('status', function(st) {
+            console.log("status: " + st);
+            // this.deepPrintObj(st);
+        });
+
+        call.on('end', function() {
+            console.log("RPC stream end");
+            }); 
 
         // for (var entry in call) {
         //     efs.sendMessage('runData', entry);
         //     self.got_data = true
         // }
         // console.log("call:");
-        // for (var entry in call) {
-        //     console.log(entry + ": " + call[entry]);
-        // }
-
+        // this.deepPrintObj(call);
 
     }
 }

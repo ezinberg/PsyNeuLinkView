@@ -5,10 +5,11 @@
 
 import sys
 
-sys.path.insert(0, r'/Users/ezrazinberg/desktop/code/psynl/PsyNeuLinkView-master/src/py')
+sys.path.insert(0, r'/Users/ezrazinberg/desktop/code/psynl/PsyNeuLinkView/src/py')
 
 import rpc_server as rpc
 import copy
+# from psyneulink.core.rpc import graph_pb2, graph_pb2_grpc
 
 pnl_container = rpc.Container()
 # print(pnl_container)
@@ -16,7 +17,7 @@ pnl_container = rpc.Container()
 # comp = pnl_container.hashable_pnl_objects['compositions'][-1]
 # print(pnl_container.hashable_pnl_objects['compositions'])
 
-filepath = r'/Users/ezrazinberg/desktop/code/psynl/PsyNeuLinkView/examples/dillon/pnlv-plotting-test.py'
+filepath = r'/Users/ezrazinberg/desktop/code/psynl/PsyNeuLinkView/examples/working-test/pnlv-plotting-test.py'
 comps = rpc.loadScript(filepath)
 # print(comps)
 
@@ -51,13 +52,28 @@ prefs = [pref1, pref2]
 # prefs = [{'componentName': 'input-151', 'parameterName': 'InputPort-0', 'condition': 2}, \
 #    {'componentName': 'output-151', 'parameterName': 'OutputPort-0', 'condition': 2 } ]
 
-# d = {'inputs': ins, 'servePrefs': {'servePrefSet': prefs} } 
+
+
+d = {'inputs': ins, 'servePrefs': {'servePrefSet': prefs} } 
 
 class p:
-    servePrefSet = prefs
+    servePrefSet = [pref1]
 
-res = rpc.run_composition(comp, ins, p)
 
-print("res: " + str(res))
-print("comp: " + str(type(comp)))
-print(comp.results)
+class req:
+    inputs = ins
+    servePrefs = p
+
+# res = rpc.run_composition(comp, ins, p)
+
+
+gs = rpc.GraphServer()
+
+gen = gs.RunComposition(req, None)
+
+for g in gen:
+    print(type(g))
+
+# print("res: " + str(res))
+# print("comp: " + str(type(comp)))
+# print(comp.results)

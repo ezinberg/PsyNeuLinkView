@@ -1,6 +1,10 @@
 import pytest
-import ast_parse
+# import ast_parse
 import psyneulink
+import sys
+
+sys.path.append("/Users/ezrazinberg/Desktop/code/psynl/PsyNeuLinkView/src/py")
+import ast_parse
 
 
 class TestSuite:
@@ -29,4 +33,24 @@ class TestSuite:
         exec(dg.src_executed, fresh_namespace)
         for cat in psyneulink.CompositionRegistry:
             for comp_name in psyneulink.CompositionRegistry[cat][1]:
-                psyneulink.CompositionRegistry[cat][1][comp_name].show_graph(output_fmt='gv')
+                psyneulink.CompositionRegistry[cat][1][comp_name].show_graph(output_fmt='pdf')
+                print(comp_name)
+
+
+# def test_actual_scripts(filepath):
+#         src_str = open(filepath, 'r').read()
+#         dg = ast_parse.DependencyGraph(src_str, psyneulink)
+#         namespace = {}
+#         dg.execute_ast(namespace)
+#         psyneulink.clear_registry(psyneulink.MechanismRegistry)
+#         psyneulink.clear_registry(psyneulink.CompositionRegistry)
+#         psyneulink.clear_registry(psyneulink.FunctionRegistry)
+#         fresh_namespace = {}
+#         exec(dg.src_executed, fresh_namespace)
+#         for cat in psyneulink.CompositionRegistry:
+#             for comp_name in psyneulink.CompositionRegistry[cat][1]:
+#                 psyneulink.CompositionRegistry[cat][1][comp_name].show_graph(output_fmt='gif')
+#                 print(comp_name)
+
+# rumel = './pnl_scripts/Rumelhart Semantic Network.py'
+# test_actual_scripts(rumel)

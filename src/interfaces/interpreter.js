@@ -323,13 +323,17 @@ class InterpreterInterface{
                     );
                     this.childProc = null
                 } else {
-                    process.kill(-this.childProc.pid);
+                    // process.kill(this.childProc.pid);
+
                     // this.childProc.kill();
+
+                    var ret = spawnSync("kill", [this.childProc.pid]);
+                    console.log("killed " + this.childProc.pid + " with ret value: " + ret);
                     this.childProc = null;
                 }
             }
             catch (e) {
-
+                console.log("error in killRPCServer(): " + e);
             }
         }
     }

@@ -50,12 +50,12 @@ pnlv_graphics_spec = {
     "Canvas Settings": {
         "Width": 78.61,
         "Height": 48.72,
-        "Zoom": 276,
-        "xScroll": 68,
-        "yScroll": 65
+        "Zoom": 225,
+        "xScroll": 44,
+        "yScroll": 66
     },
     "Graph Settings": {
-        "Scale": 0.31,
+        "Scale": 0.7,
         "Components": {
             "Nodes": {
                 "mid": {
@@ -309,6 +309,126 @@ pnlv_graphics_spec = {
                 "ACT_OUT-2": {
                     "x": 52.43,
                     "y": 54.53
+                },
+                "REP_IN-3": {
+                    "x": 85.18,
+                    "y": 19.54
+                },
+                "MappingProjection from REP_IN-3[RESULT] to REP_HIDDEN-3[InputPort-0]": {
+                    "x": 75.81,
+                    "y": 25.44
+                },
+                "Learning Mechanism for MappingProjection from REP_IN-3[RESULT] to REP_HIDDEN-3[InputPort-0]": {
+                    "x": 84.74,
+                    "y": 77.97
+                },
+                "Target-18": {
+                    "x": 55.56,
+                    "y": 54.57
+                },
+                "Comparator-18": {
+                    "x": 53.52,
+                    "y": 60.46
+                },
+                "Target-17": {
+                    "x": 77.19,
+                    "y": 54.57
+                },
+                "Comparator-17": {
+                    "x": 74.83,
+                    "y": 60.46
+                },
+                "Target-16": {
+                    "x": 12.29,
+                    "y": 54.57
+                },
+                "Comparator-16": {
+                    "x": 11.52,
+                    "y": 60.46
+                },
+                "Target-15": {
+                    "x": 35.24,
+                    "y": 54.57
+                },
+                "Comparator-15": {
+                    "x": 33.72,
+                    "y": 60.46
+                },
+                "REL_IN-3": {
+                    "x": 85.57,
+                    "y": 66.24
+                },
+                "MappingProjection from REL_IN-3[RESULT] to REL_HIDDEN-3[InputPort-0]": {
+                    "x": 66.25,
+                    "y": 77.97
+                },
+                "Learning Mechanism for MappingProjection from REL_IN-3[RESULT] to REL_HIDDEN-3[InputPort-0]": {
+                    "x": 64.78,
+                    "y": 72.13
+                },
+                "REL_HIDDEN-3": {
+                    "x": 41.06,
+                    "y": 42.95
+                },
+                "Learning Mechanism for MappingProjection from REP_HIDDEN-3[RESULT] to REL_HIDDEN-3[InputPort-0]": {
+                    "x": 16.01,
+                    "y": 72.13
+                },
+                "MappingProjection from REL_HIDDEN-3[RESULT] to REP_OUT-3[InputPort-0]": {
+                    "x": 26.19,
+                    "y": 48.78
+                },
+                "Learning Mechanism for MappingProjection from REL_HIDDEN-3[RESULT] to REP_OUT-3[InputPort-0]": {
+                    "x": 26.14,
+                    "y": 66.3
+                },
+                "MappingProjection from REL_HIDDEN-3[RESULT] to PROP_OUT-3[InputPort-0]": {
+                    "x": 2.48,
+                    "y": 48.78
+                },
+                "Learning Mechanism for MappingProjection from REL_HIDDEN-3[RESULT] to PROP_OUT-3[InputPort-0]": {
+                    "x": 6.26,
+                    "y": 66.3
+                },
+                "MappingProjection from REL_HIDDEN-3[RESULT] to QUAL_OUT-3[InputPort-0]": {
+                    "x": 69.87,
+                    "y": 48.78
+                },
+                "Learning Mechanism for MappingProjection from REL_HIDDEN-3[RESULT] to QUAL_OUT-3[InputPort-0]": {
+                    "x": 66.61,
+                    "y": 66.3
+                },
+                "MappingProjection from REL_HIDDEN-3[RESULT] to ACT_OUT-3[InputPort-0]": {
+                    "x": 48.51,
+                    "y": 48.78
+                },
+                "Learning Mechanism for MappingProjection from REL_HIDDEN-3[RESULT] to ACT_OUT-3[InputPort-0]": {
+                    "x": 45.85,
+                    "y": 66.3
+                },
+                "MappingProjection from REP_HIDDEN-3[RESULT] to REL_HIDDEN-3[InputPort-0]": {
+                    "x": 37.12,
+                    "y": 37.11
+                },
+                "REP_HIDDEN-3": {
+                    "x": 60.2,
+                    "y": 31.27
+                },
+                "REP_OUT-3": {
+                    "x": 32.12,
+                    "y": 54.57
+                },
+                "PROP_OUT-3": {
+                    "x": 8.92,
+                    "y": 54.57
+                },
+                "QUAL_OUT-3": {
+                    "x": 73.79,
+                    "y": 54.57
+                },
+                "ACT_OUT-3": {
+                    "x": 41.98,
+                    "y": 57.24
                 }
             }
         }

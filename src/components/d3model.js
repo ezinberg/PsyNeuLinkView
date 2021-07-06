@@ -713,6 +713,12 @@ class D3model extends React.Component {
                 return '10px'
             })
             .text(function (d) {
+                // console.log("d.name: " + d.name);
+                // var nm = d.name;
+                // var dash = nm.indexOf('-');
+                // var res = d.name.substring(0,dash+1);
+                // res = res + '0';
+                // return res;
                 return d.name
             })
             .call(d3.drag()

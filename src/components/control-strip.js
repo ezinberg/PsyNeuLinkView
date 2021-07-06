@@ -2,8 +2,10 @@ import React from 'react'
 import {connect} from "react-redux";
 import {store} from "../state/store";
 import { setActiveView } from "../state/core/actions";
-import {Icon, Tab, Tabs} from "@blueprintjs/core"
-import '../css/controlstrip.css'
+import {Icon, Tab, Tabs} from "@blueprintjs/core";
+import '../css/controlstrip.css';
+
+// const {spawn, spawnSync, exec} = require('child_process');
 
 const mapStateToProps = ({core, psyNeuLinkParameters, psyNeuLinkComponents, subplots}) => {
     return {
@@ -50,10 +52,13 @@ class ControlStrip extends React.Component {
                     }
                 }
             );
-            console.log("running comp");
+            console.log("running comp with");
+            console.log(inputs);
+            console.log(deliveryConditions);
             rpc.run_composition(
                 inputs, deliveryConditions
             );
+
         }
     }
 
