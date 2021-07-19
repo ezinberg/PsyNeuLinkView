@@ -55,7 +55,7 @@ class D3model extends React.Component {
         this.setAspectRatio();
         this.flags = {
             dirty: false,
-            reloadLoactions: false,
+            reloadLocations: false,
             updateLocations: false
         };
     }
@@ -85,9 +85,9 @@ class D3model extends React.Component {
         if (sizeUpdated) {
             this.reDimensionViewbox();
         }
-        if (this.flags.reloadLoactions) {
+        if (this.flags.reloadLocations) {
             this.setNodePositioningFromStylesheet();
-            this.flags.reloadLoactions = false;
+            this.flags.reloadLocations = false;
         }
         if (this.flags.updateLocations) {
             this.commitAllNodesToStylesheet();
@@ -203,14 +203,18 @@ class D3model extends React.Component {
     updateGraphFromStylesheet(prevProps) {
         var styleUpdated = (!(_.isEqual(this.props.graphStyle, prevProps.graphStyle))),
             prevAndCurrentStyleExist = (!_.isEmpty(prevProps.graphStyle) && !_.isEmpty(this.props.graphStyle));
-
+        console.log("updateGraphFromStylesheet(), prev... = " + prevAndCurrentStyleExist);
         if (prevAndCurrentStyleExist) {
             var styleDiff = this.difference(this.props.graphStyle, prevProps.graphStyle);
             if (!_.isEmpty(styleDiff) &&
                 !document.hasFocus() &&
                 !this.flags.dirty
             ) {
-                this.handleStyleDiff(styleDiff)
+                this.handleStyleDiff(styleDiff);
+                console.log("handlestylediff");
+            }
+            else {
+                console.log("stylediff is empty");
             }
         }
     }
@@ -306,6 +310,7 @@ class D3model extends React.Component {
     }
 
     handleNodeDiff(styleDiff) {
+        console.log("handlenodediff");
         var graphSS = this.stylesheet['Graph Settings'],
             componentsProps = this.props.graphStyle['Graph Settings']['Components'];
         if ('Graph Settings' in styleDiff) {
@@ -324,8 +329,12 @@ class D3model extends React.Component {
                 }
             });
         }
-
-        return changes(object, base);
+        var res = changes(object, base);
+        console.log("difference() result: ");
+        console.log(res);
+        // res obj is empty
+        return res;
+        // return changes(object, base);
     }
 
     validateStylesheet() {
@@ -1453,7 +1462,7 @@ class D3model extends React.Component {
             win = document.querySelector('.graph-view');
         this.svg.call(this.zoom.scaleTo, zoom / 100);
         self.props.graphSizeFx(width, height, () => {
-            self.flags.reloadLoactions = true;
+            self.flags.reloadLocations = true;
             var scrollBounds = self.getScrollBounds(),
                 xScroll = self.stylesheet['Canvas Settings']['xScroll'],
                 yScroll = self.stylesheet['Canvas Settings']['yScroll'];
@@ -1463,6 +1472,7 @@ class D3model extends React.Component {
     }
 
     setNodePositioningFromStylesheet() {
+        console.log("setNodePositioningFromStylesheet()");
         var self = this,
             stylesheet = self.stylesheet,
             pnlvNode, nodes, cx, cy, scale, zoom;
@@ -1575,7 +1585,7 @@ class D3model extends React.Component {
         this.setNonReactState();
         this.setIndex();
         this.drawElements();
-        // this.parseStylesheet();
+        this.parseStylesheet();
         this.setState({mounted: true});
         window.this = this
     }

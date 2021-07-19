@@ -3,6 +3,7 @@ from enum import Enum
 import sys
 import re
 
+
 class DependencyGraph:
     def __init__(self, src, psyneulink_instance):
         self.psyneulink_instance = psyneulink_instance
@@ -42,6 +43,13 @@ class DependencyGraph:
         self.src_executed = ''
         self.compositions = []
 
+
+    def print_to_file(self, text):
+        with open("/Users/ezrazinberg/Desktop/code/psynl/PsyNeuLinkView/src/py/debug_out.txt", 'a') as f:
+            f.write(str(text) + "\n")
+            f.flush()
+
+
     def get_class_hierarchy(self, root_class, class_hierarchy=None):
         if class_hierarchy is None:
             class_hierarchy = [root_class.__name__]
@@ -52,7 +60,7 @@ class DependencyGraph:
                 self.get_class_hierarchy(subclass, class_hierarchy=class_hierarchy)
         return class_hierarchy
 
-    def execute_node(self, node, namespace):
+    def execute_node(self, node, namespace):        
         try:
             if not node in self.index:
                 self.index[node]= {'executed':False}

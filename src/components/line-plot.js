@@ -44,12 +44,12 @@ class LinePlot extends Plot {
         let data = [];
         let name, ownerName, color;
 
-        console.log("dataSources.size: " + thisPlotMetaData.dataSources.size);
+        // console.log("dataSources.size: " + thisPlotMetaData.dataSources.size);
         // set size is 0 before any lines to plot are selected
 
         for (const dataSource of thisPlotMetaData.dataSources){
             
-            console.log("dataSource: " + dataSource);
+            // console.log("dataSource: " + dataSource);
             
             name = psyNeuLinkIdToName[dataSource];
             ownerName = psyNeuLinkIdToName[dataSourceIdToOwnerId[dataSource]];
@@ -106,17 +106,17 @@ class LinePlot extends Plot {
                     staggeredTimeCounter[run][trial][pass][timestep] = 1
                 }
             }
-            console.log("before loop line-plot:103");
+            // console.log("before loop line-plot:103");
 
-            console.log("dataSourceIdToData.size: " + dsitdSize);
-            console.log("dataSourceIdToData[dataSource]: " + dataSourceIdToData[dataSource]);
-            (dataSource in dataSourceIdToData) ? console.log("found") : console.log("not found");
+            // console.log("dataSourceIdToData.size: " + dsitdSize);
+            // console.log("dataSourceIdToData[dataSource]: " + dataSourceIdToData[dataSource]);
+            // (dataSource in dataSourceIdToData) ? console.log("found") : console.log("not found");
 
             
 
             // not entering this loop, not updating datumObj
             for (const datum of dataSourceIdToData[dataSource]){
-                console.log("in datum loop line-plot:119");
+                // console.log("in datum loop line-plot:119");
 
                 let time = datum.time.split(':');
                 let run = parseInt(time[0]);
@@ -131,14 +131,14 @@ class LinePlot extends Plot {
             }
             data.push(datumObj);
 
-            console.log("datumObj: " + datumObj);
+            // console.log("datumObj: " + datumObj);
             for (var key in datumObj) {
                 // if (key === "dataSources") {
                 //     for (var s in metaData[id][key]) {
                 //         console.log("dataSource: " + s);
                 //     }
                 // }
-                console.log(key + ": " + datumObj[key]);
+                // console.log(key + ": " + datumObj[key]);
             }
         }
         return data
@@ -163,7 +163,7 @@ class LinePlot extends Plot {
         let data = this.getData();
         let xAxis = subplotMetaData[id].xAxis;
         let yAxis = subplotMetaData[id].yAxis;
-        console.log("line-plot data: " + data);
+        // console.log("line-plot data: " + data);
         return (
             <div
                 style={{width:width, height:height, color:'black'}}
@@ -252,7 +252,7 @@ class LinePlot extends Plot {
     }
 
     render(){
-        console.log(1);
+        // console.log(1);
         return(
             <div>
                 {this.getLinePlot()}

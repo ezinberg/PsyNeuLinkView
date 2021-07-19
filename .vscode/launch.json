@@ -15,42 +15,41 @@
 //         }
 //     ]
 // }
-
-
-
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
 
-      {
-        "name": "Debug Main Process",
-        "type": "pwa-node",
-        "request": "launch",
-        "cwd": "${workspaceFolder}",
-
-        "resolveSourceMapLocations": [
-          "${workspaceFolder}/**",
-          "!**/node_modules/**"
-          ],
-        
-        "trace": true,
-
-        // "console": "integratedTerminal",
-        // "nodeVersionHint": 10,
-
-        // "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        // "windows": {
-        //   "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-        // },
-
-        "runtimeExecutable": "yarn",
-
-        // "args" : ["."],
-
-        "args" : ["electron-dev"],
-
-        "outputCapture": "std"
-      }
-    ],
-    "debug.javascript.usePreview": false,
-  } 
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Debug Main Process",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "trace": true,
+      // "console": "integratedTerminal",
+      // "nodeVersionHint": 10,
+      // "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      // "windows": {
+      //   "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      // },
+      "runtimeExecutable": "yarn",
+      // "args" : ["."],
+      "args": [
+        "electron-dev"
+      ],
+      "outputCapture": "std"
+    }
+  ],
+  "debug.javascript.usePreview": false,
+}

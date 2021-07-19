@@ -329,6 +329,9 @@ class InterpreterInterface{
 
                     var ret = spawnSync("kill", [this.childProc.pid]);
                     console.log("killed " + this.childProc.pid + " with ret value: " + ret);
+                    for (var prop in ret) {
+                        console.log(prop + ": " + ret[prop]);
+                    }
                     this.childProc = null;
                 }
             }

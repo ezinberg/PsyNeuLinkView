@@ -42,9 +42,9 @@ class pref:
 pref1 = copy.copy(pref)
 pref2 = copy.copy(pref)
 
-pref1.componentName = 'input'
+pref1.componentName = '(ProcessingMechanism input)'
 pref1.parameterName = 'InputPort-0'
-pref2.componentName = 'output'
+pref2.componentName = '(ProcessingMechanism output)'
 pref2.parameterName = 'OutputPort-0'
 
 prefs = [pref1, pref2]

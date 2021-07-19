@@ -131,9 +131,6 @@ class WorkSpace extends React.PureComponent {
      *  - (n-dimensional Array) value
      */
     handleIncomingData(event, message) {
-        console.log("handleIncomingData message: " + message);
-        // ! not being called from rpc.js:214
-
         let {componentMapIdToParameterSet: idToParameters,
             componentMapNameToId: nameToId,
             psyNeuLinkMapIdToName: idToName,
@@ -141,13 +138,6 @@ class WorkSpace extends React.PureComponent {
         let ownerName = message.componentName;
         let ownerId = nameToId[ownerName];
         let ownerParameters = idToParameters[ownerId];
-
-        console.log("ownerId: " + ownerId);
-        console.log("idToParameters: ");
-        for (var prop in idToParameters) {
-            console.log(prop + ": " + idToParameters[prop])
-        }
-        // console.log("ownerParameters: " + ownerParameters);
 
         for (const id of ownerParameters){
             if (idToName[id] == message.parameterName){
@@ -351,7 +341,6 @@ class WorkSpace extends React.PureComponent {
         self.setState({'filepath':filepath});
         rpcClient.load_script(filepath, (err) => {
                 if (err) {
-                    // console.log("worskpace:343");
                     self.dispatcher.capture({
                             error: "Python interpreter crashed while loading script. ",
                             message:
@@ -369,7 +358,6 @@ class WorkSpace extends React.PureComponent {
                     this.filepath = filepath
                     rpcClient.get_json(composition, function (err) {
                         if (err) {
-                            // console.log("worskpace:361");
                             self.dispatcher.capture({
                                     error: "Python interpreter crashed while loading script.",
                                     message:
@@ -413,6 +401,9 @@ class WorkSpace extends React.PureComponent {
         if (filepath.startsWith(homedir)){
             filepath = `~${filepath.slice(homedir.length)}`
         }
+
+        // self.getCurrentGraphStyle();
+
         fs.watch(filepath, (e)=>{
             window.dispatchEvent(new Event(e));
             self.getCurrentGraphStyle()
@@ -469,11 +460,11 @@ class WorkSpace extends React.PureComponent {
     /**
      * Gets the currently specified graph style from the loaded script
      */
+    // !
     getCurrentGraphStyle(){
         var self = this;
         this.rpcClient.get_style(self.filepath, function (err) {
             if (err) {
-                // console.log("worskpace:465");
                 self.dispatcher.capture({
                         error: "Python interpreter crashed while loading script.",
                         message:
@@ -491,6 +482,7 @@ class WorkSpace extends React.PureComponent {
             } catch {
                 var new_graph_style = {};
             }
+
             self.props.setStyleSheet(new_graph_style);
         })
     }
@@ -639,7 +631,6 @@ class WorkSpace extends React.PureComponent {
                     onResize={
                         // self.panelResize
                         (e, dir, ref, delta)=>{
-                            console.log("it's resizing");
                             this.setState(
                                 {
                                     rowOneHorizontalFactor:this.state.baselineRowOneH + delta.width,
@@ -829,7 +820,6 @@ class WorkSpace extends React.PureComponent {
                     }
                     onResizeStop={
                         (e, dir, ref, delta)=>{
-                            console.log('stop')
                             this.setState(
                                 {
                                     baselineRowTwoH:this.state.baselineRowTwoH - delta.width,

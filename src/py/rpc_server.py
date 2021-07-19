@@ -27,14 +27,16 @@ if len(sys.argv) > 1:
         pass
 
 import sys
-# sys.path.append(r'C:\Users\Dillo\PycharmProjects\PsyNeuLink')
 sys.path.append(r'/Users/ezinberg/desktop/code/psynl/PsyNeuLink')
 import psyneulink as pnl
 from psyneulink.core.rpc import graph_pb2, graph_pb2_grpc
 
-pnl.clear_registry(pnl.MechanismRegistry)
-pnl.clear_registry(pnl.CompositionRegistry)
-pnl.clear_registry(pnl.FunctionRegistry)
+
+def print_to_file(text):
+    with open("/Users/ezrazinberg/Desktop/code/psynl/PsyNeuLinkView/src/py/debug_out.txt", 'a') as f:
+        f.write(str(text) + "\n")
+        f.flush()
+
 
 serve_conditions = {
     0:'INITIALIZATION',
@@ -80,6 +82,10 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
         filepath = request.path
         load_style(filepath)
         graphics = pnl_container.graphics_spec
+        
+        print_to_file("graphics:")
+        print_to_file(graphics)
+        
         return graph_pb2.StyleJSON(styleJSON=json.dumps(graphics))
 
     def LoadScript(self, request, context):
@@ -123,10 +129,6 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
     # Forks thread that runs run_composition. Thread writes to 
     # pnl_container.shared_queue, which is repeatedly checked below in the while loop.
     def RunComposition(self, request, context):
-        global f
-        # raise ValueError("rpc_server.RunComposition()")
-
-        print("in RunComposition", file=f, flush=True)
 
         thread = threading.Thread(target=run_composition,
                                   args=[
@@ -140,21 +142,15 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
 
 
         while True:
-
             if not pnl_container.shared_queue.empty():
-                # print("if", file=sys.stderr)
                 e =  pnl_container.shared_queue.get()
                 if isinstance(e, graph_pb2.Entry):
                     yield e
 
                 # print(e)
-
-                
             else:
-                # print("else", file=sys.stderr)
                 if not thread.is_alive():
                     break
-                # break  
 
 pnl_container = Container()
 
@@ -164,26 +160,15 @@ def get_current_composition():
     return list(pnl_container.pnl_objects['compositions'].values())[-1]
 
 def handle_serve_prefs(composition, servePrefs):
-    global f
-
     # turn on RPC communication for all selected parameters
     comp = get_current_composition()
 
-    # print("comp.nodes: " + str(comp.nodes), file=f, flush=True)
-    print("handle_serve_prefs()", file=f, flush=True)
-
-
-    # ! Component naming mismatch occurs here, causing ports to not be entered into RPC LogCondition
     for servePref in servePrefs.servePrefSet:
-        print("servePref: " + str(servePref), file=f, flush=True)
         if not servePref.componentName in comp.nodes:
-            print(servePref.componentName + " found", file=f, flush=True)
-            warnings.warn(f'Component {servePref.componentName} is not in composition {comp.name}. Skipping Component.')
+            warnings.warn(f'Component {servePref.componentName} is not in composition {comp.name} with nodes {comp.nodes}. Skipping Component.')
         else:
-            print(servePref.componentName + "not found", file=f, flush=True)
             node = comp.nodes[servePref.componentName]
             if not servePref.parameterName in node.loggable_items:
-                print(servePref.componentName + "not found in loggable_items", file=f, flush=True)
                 warnings.warn(
                     f'Parameter {servePref.parameterName} is not a loggable item of {node.name}. Skipping Parameter.')
             else:
@@ -191,14 +176,6 @@ def handle_serve_prefs(composition, servePrefs):
                                              pnl.LogCondition.__dict__[serve_conditions[servePref.condition]])
 
 def run_composition(composition, inputs, servePrefs):
-
-    # raise ValueError("rpc_server.run_composition()")
-
-    global f
-    f = open('/Users/ezrazinberg/Desktop/code/psynl/PsyNeuLinkView/src/py/out.txt', 'w')
-
-    print("in run_composition()", file=f, flush=True)
-
     formatted_inputs = {}
     handle_serve_prefs(composition, servePrefs)
     con = pnl.Context(
@@ -211,13 +188,6 @@ def run_composition(composition, inputs, servePrefs):
         cols = inputs[key].cols
         formatted_inputs[comp.nodes[key]] = np.array(inputs[key].data).reshape((rows, cols))
     comp.run(inputs = formatted_inputs, context = con)
-
-    qs = pnl_container.shared_queue.qsize()
-    # print("rc: queue size after run: " + str(qs), file=sys.stderr)
-    # for it in range(qs):
-    #     item = pnl_container.shared_queue.get()
-    #     print(item)
-    #     pnl_container.shared_queue.put(item)
 
 
 def get_new_pnl_objects(namespace):
@@ -233,6 +203,8 @@ def get_new_pnl_objects(namespace):
 def get_graphics_dict(namespace):
     if 'pnlv_graphics_spec' in namespace:
         pnl_container.graphics_spec = namespace['pnlv_graphics_spec']
+        print_to_file("graphics dict read:")
+        print_to_file(pnl_container.graphics_spec)
 
 def load_style(filepath):
     file = open(filepath, 'r').read()
@@ -247,16 +219,16 @@ def load_style(filepath):
 
 def loadScript(filepath):
     pnl_container.filepath = filepath
-    pnl_container.AST = open(filepath, 'r').read()
+
+    try:
+        with open(filepath, 'r') as f:
+            pnl_container.AST = f.read()
+    except:
+        print_to_file("error reading ast from file")
+
     dg = ast_parse.DependencyGraph(pnl_container.AST, pnl)
     namespace = {}
     dg.execute_ast(namespace)
-
-    pnl.clear_registry(pnl.MechanismRegistry)
-    pnl.clear_registry(pnl.CompositionRegistry)
-    pnl.clear_registry(pnl.FunctionRegistry)
-    pnl.clear_registry(pnl.PathwayRegistry)
-    namespace = {}
 
     get_new_pnl_objects(namespace)
     get_graphics_dict(namespace)
@@ -342,30 +314,16 @@ def get_gv_json(name):
     gv_d['maxY'] = float(gv_svg_dict['svg']['height'].replace('pt', ''))
     return gv_d
 
+
+
 def serve():
-    global f
-
-    f = open('/Users/ezrazinberg/Desktop/code/psynl/PsyNeuLinkView/src/py/out.txt', 'w')
-
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
     graph_pb2_grpc.add_ServeGraphServicer_to_server(GraphServer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
     print('PYTHON SERVER READY')
-
-    print("PYTHON SERVER READY", file=f, flush=True)    
-    
-    pnl.clear_registry(pnl.MechanismRegistry)
-    pnl.clear_registry(pnl.CompositionRegistry)
-    pnl.clear_registry(pnl.FunctionRegistry)
-    pnl.clear_registry(pnl.PathwayRegistry)
-
-
     server.wait_for_termination()
 
-    
-
-    f.close()
 
 if __name__ == '__main__':
     serve()

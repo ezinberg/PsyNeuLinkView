@@ -121,6 +121,7 @@ class RPCInterface{
                 callback()
             }
         })
+        console.log("script_maintainer.style: " + self.script_maintainer.style["Graph Settings"]["Components"]["Nodes"]["output"]["x"]);
     }
 
     get_json(name, callback = function () {
