@@ -1,6 +1,6 @@
 # PsyNeuLinkView
 
-PsyNeuLinkView (PNLV) is an application that provides a graphical user interface to the PsyNeuLink (PNL) Python library. This allows users to visualize and edit PNL compositions in a drag-and-drop format on a native desktop app. An open source project, PNLV is built with an Electron frontend that uses gRPC to interact with a Python server running a PNL script. 
+PsyNeuLinkView (PNLV) is an application that provides a graphical user interface to the [PsyNeuLink (PNL)](https://github.com/PrincetonUniversity/PsyNeuLink) Python library. This allows users to visualize and edit PNL compositions in a drag-and-drop format on a native desktop app. An open source project, PNLV is built with an Electron frontend that uses gRPC to interact with a Python server running a PNL script. 
 
 PNLV currently supports the following features:
 - View PNL compositions where the PNL script contains only one composition within its namespace.
