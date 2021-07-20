@@ -193,8 +193,6 @@ def get_new_pnl_objects(namespace):
 def get_graphics_dict(namespace):
     if 'pnlv_graphics_spec' in namespace:
         pnl_container.graphics_spec = namespace['pnlv_graphics_spec']
-        print_to_file("graphics dict read:")
-        print_to_file(pnl_container.graphics_spec)
 
 def load_style(filepath):
     file = open(filepath, 'r').read()
