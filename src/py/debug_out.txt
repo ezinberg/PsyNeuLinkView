@@ -172,3 +172,55 @@ graphics:
 {'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
 graphics:
 {'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 33.7, 'y': 86.38}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 33.7, 'y': 86.38}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 33.73, 'y': 86.66}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.63, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.49, 'Components': {'Nodes': {'Hebb_mech': {'x': 28.58, 'y': 42.94}, 'Hebb_mech recurrent projection': {'x': 34.09, 'y': 1.66}, 'AutoAssociativeLearningMechanism for Hebb_mech': {'x': 46.37, 'y': 65.71}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.75, 'Height': 72.45, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 1.05, 'Components': {'Nodes': {'DECISION': {'x': 45.73, 'y': 81.96}, 'TASK INPUT': {'x': 46.06, 'y': 13.65}, 'TASK': {'x': 47.74, 'y': 36.92}, 'WORD INPUT': {'x': 60.36, 'y': 15.59}, 'WORD HIDDEN': {'x': 52.41, 'y': 49.42}, 'COLOR INPUT': {'x': 31.9, 'y': 15.41}, 'COLOR HIDDEN': {'x': 38.09, 'y': 49.24}, 'OUTPUT': {'x': 46.02, 'y': 66.67}, 'reward': {'x': 58.09, 'y': 77.22}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics dict read:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}
+graphics:
+{'Window Settings': {'Width': '', 'Height': ''}, 'Canvas Settings': {'Width': 78.49, 'Height': 48.72, 'Zoom': 100, 'xScroll': 0, 'yScroll': 0}, 'Graph Settings': {'Scale': 2.12, 'Components': {'Nodes': {'input': {'x': 75.7, 'y': 16.08}, 'mid': {'x': 29.89, 'y': 29.69}, 'output': {'x': 49.68, 'y': 49.07}}}}}

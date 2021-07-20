@@ -5,14 +5,13 @@ from concurrent import futures
 import redbaron
 import json
 import sys
-import subprocess, os
+import os
 from xml.etree.cElementTree import fromstring
 from collections import defaultdict
 import ast_parse
 import threading
-import random
 import warnings
-import time
+
 
 f = None
 
@@ -24,10 +23,9 @@ if len(sys.argv) > 1:
     try:
         sys.path.append(sys.argv[1])
     except:
-        pass
+        raise ValueError("error appending arg to path")
 
 import sys
-sys.path.append(r'/Users/ezinberg/desktop/code/psynl/PsyNeuLink')
 import psyneulink as pnl
 from psyneulink.core.rpc import graph_pb2, graph_pb2_grpc
 
@@ -82,10 +80,6 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
         filepath = request.path
         load_style(filepath)
         graphics = pnl_container.graphics_spec
-        
-        print_to_file("graphics:")
-        print_to_file(graphics)
-        
         return graph_pb2.StyleJSON(styleJSON=json.dumps(graphics))
 
     def LoadScript(self, request, context):
@@ -138,16 +132,12 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
                                   ])
         thread.daemon = True
         thread.start()
-        i = 0
-
 
         while True:
             if not pnl_container.shared_queue.empty():
                 e =  pnl_container.shared_queue.get()
                 if isinstance(e, graph_pb2.Entry):
                     yield e
-
-                # print(e)
             else:
                 if not thread.is_alive():
                     break
