@@ -121,7 +121,6 @@ class RPCInterface{
                 callback()
             }
         })
-        console.log("script_maintainer.style: " + self.script_maintainer.style["Graph Settings"]["Components"]["Nodes"]["output"]["x"]);
     }
 
     get_json(name, callback = function () {
@@ -307,47 +306,6 @@ class RPCInterface{
             }
         );
 
-        // var reader = call.getReader();
-        // console.log("reader: " +  reader);
-
-        // console.time("t");
-
-        // console.log("typeof(call): " + typeof(call));
-        // console.log("before call.on('data')");
-        
-        // console.log("call.next(): " + call.next());
-
-        // call.on('data', function (entry) {
-        //     console.log("call.on('data') triggered with entry: " + console.log(entry));
-        //     efs.sendMessage('runData', entry);
-        //     self.got_data = true
-        // });
-
-        // call.on('error', function(e) {
-        //     // An error has occurred and the stream has been closed.
-        //     console.log("RPC error");
-        //   });
-
-        // call.on('end', function() {
-        //     console.timeLog("t");
-        //     console.log("RPC stream end");
-        //     });
-
-        // call.on('readable', () => {
-        //     var entry = call.read();
-        //     // while (entry === null) {
-        //     //     entry = call.read();
-        //     // }
-        //     if (entry !== null) {
-        //         console.log("call.on('readable') triggered with entry: " + entry);
-        //         efs.sendMessage('runData', entry);
-        //         self.got_data = true;
-        //     }
-        //     else {
-        //         console.log("call.on('readable') entry is null");
-        //     }
-            
-        // });
 
         call.on('data', function (entry) {
             console.log("call.on('data') triggered with entry: " + entry);
@@ -368,14 +326,6 @@ class RPCInterface{
         call.on('end', function() {
             console.log("RPC stream end");
             }); 
-
-        // for (var entry in call) {
-        //     efs.sendMessage('runData', entry);
-        //     self.got_data = true
-        // }
-        // console.log("call:");
-        // this.deepPrintObj(call);
-
     }
 }
 

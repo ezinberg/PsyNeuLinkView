@@ -203,7 +203,6 @@ class D3model extends React.Component {
     updateGraphFromStylesheet(prevProps) {
         var styleUpdated = (!(_.isEqual(this.props.graphStyle, prevProps.graphStyle))),
             prevAndCurrentStyleExist = (!_.isEmpty(prevProps.graphStyle) && !_.isEmpty(this.props.graphStyle));
-        console.log("updateGraphFromStylesheet(), prev... = " + prevAndCurrentStyleExist);
         if (prevAndCurrentStyleExist) {
             var styleDiff = this.difference(this.props.graphStyle, prevProps.graphStyle);
             if (!_.isEmpty(styleDiff) &&
@@ -211,10 +210,6 @@ class D3model extends React.Component {
                 !this.flags.dirty
             ) {
                 this.handleStyleDiff(styleDiff);
-                console.log("handlestylediff");
-            }
-            else {
-                console.log("stylediff is empty");
             }
         }
     }
@@ -310,7 +305,6 @@ class D3model extends React.Component {
     }
 
     handleNodeDiff(styleDiff) {
-        console.log("handlenodediff");
         var graphSS = this.stylesheet['Graph Settings'],
             componentsProps = this.props.graphStyle['Graph Settings']['Components'];
         if ('Graph Settings' in styleDiff) {
@@ -330,9 +324,6 @@ class D3model extends React.Component {
             });
         }
         var res = changes(object, base);
-        console.log("difference() result: ");
-        console.log(res);
-        // res obj is empty
         return res;
         // return changes(object, base);
     }
@@ -722,12 +713,6 @@ class D3model extends React.Component {
                 return '10px'
             })
             .text(function (d) {
-                // console.log("d.name: " + d.name);
-                // var nm = d.name;
-                // var dash = nm.indexOf('-');
-                // var res = d.name.substring(0,dash+1);
-                // res = res + '0';
-                // return res;
                 return d.name
             })
             .call(d3.drag()
@@ -1472,7 +1457,6 @@ class D3model extends React.Component {
     }
 
     setNodePositioningFromStylesheet() {
-        console.log("setNodePositioningFromStylesheet()");
         var self = this,
             stylesheet = self.stylesheet,
             pnlvNode, nodes, cx, cy, scale, zoom;
