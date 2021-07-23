@@ -36,6 +36,7 @@ class InterpreterInterface{
         var callback = callback,
             config = ifs.getConfig(),
             pnlPath = config['Python']['PsyNeuLink Path'],
+            // pnlPath = path.join(__dirname, "../../..", "PsyNeuLink"),
             self = this,
             appPath = ifs.getApplicationPath();
         pnlPath = pnlPath ? pnlPath : '';

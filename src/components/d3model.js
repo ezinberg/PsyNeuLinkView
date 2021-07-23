@@ -9,6 +9,8 @@ import {connect} from "react-redux";
 import {store} from "../state/store";
 import {setModelAspectRatio, setStyleSheet} from "../state/core/actions";
 
+const util = require("util");
+
 const mapStateToProps = ({core}) => {
     return {
         graphStyle: core.stylesheet,
@@ -77,6 +79,10 @@ class D3model extends React.Component {
                 d3.selectAll('svg').remove();
                 this.setState({"spinnerVisible": false});
                 this.stylesheet = null;
+
+                // ! first attempt at fixing node changing bug
+                // this.props.checkScriptCallback(this.props.filepath);
+
                 this.setGraph();
             }
         }
@@ -215,6 +221,8 @@ class D3model extends React.Component {
     }
 
     handleStyleDiff(styleDiff) {
+        console.log(util.inspect(styleDiff, false, null, true));
+        
         this.handleDimensionDiff(styleDiff);
         this.handleScaleDiff(styleDiff);
         this.handleZoomDiff(styleDiff);

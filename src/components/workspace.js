@@ -378,6 +378,36 @@ class WorkSpace extends React.PureComponent {
         );
     }
 
+    // callback func passed to d3model.js to be called when the composition
+    // topology has changed in the script (e.g. added a node)
+    // same as loadScript above, but does not call rpcClient.load_script
+    // loadScript is for initial script execution,
+    // getScriptUpdate is for a topology update after the script was loaded
+    getScriptUpdate(filepath) {
+        var self = this;
+        var compositions = rpcClient.script_maintainer.compositions;
+        var composition = compositions[compositions.length - 1];
+        rpcClient.get_components(composition);
+        this.filepath = filepath
+        rpcClient.get_json(composition, function (err) {
+            if (err) {
+                self.dispatcher.capture({
+                        error: "Python interpreter crashed while loading script.",
+                        message:
+                            `Message: ${err.cause !== undefined ?
+                                err.cause.message
+                                :
+                                err.message}`
+                    },
+                    {graph: null}
+                );
+                return false
+            }
+            self.setStateFromRpcClient()
+            }
+        )
+    }
+
     /**
      * Gets Composition, graph, and graph style from RPC and registers it with redux store
      */
@@ -711,6 +741,8 @@ class WorkSpace extends React.PureComponent {
                     // graphStyle = {this.state.graphStyle}
                     filepath = {this.state.filepath}
                     graphSizeFx = {this.setGraphSize}
+
+                    checkScriptCallback = {this.getScriptUpdate.bind(this)}
                 />
             </div>,
             plotter =  <div key="plotter">

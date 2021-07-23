@@ -192,85 +192,6 @@ class RPCInterface{
         })
     }
 
-    // created to attempt running comp by spawning child process
-    // bypass rpc completely
-    // run_composition_spawn(
-    //     inputs,
-    //     servePrefs
-    //     ) {
-    //     var formatted_inputs = {};
-    //     Object.keys(inputs).forEach(
-    //         function (k) {
-    //             var data = inputs[k],
-    //                 rows = data.length,
-    //                 cols = data[0].length,
-    //                 flattened_data = data.flat(Infinity);
-    //             Object.assign(formatted_inputs,
-    //                 {
-    //                     [k]: {
-    //                         rows: rows,
-    //                         cols: cols,
-    //                         data: flattened_data
-    //                     }
-    //                 }
-    //             )
-    //         }
-    //     );
-    //     console.log(formatted_inputs, servePrefs);
-        
-    //     // var child = spawnSync();
-
-
-
-    //     call.on('readable', () => {
-    //         var entry = call.read();
-    //         // while (entry === null) {
-    //         //     entry = call.read();
-    //         // }
-    //         if (entry !== null) {
-    //             console.log("call.on('readable') triggered with entry: " + entry);
-    //             efs.sendMessage('runData', entry);
-    //             self.got_data = true;
-    //         }
-    //         else {
-    //             console.log("call.on('readable') entry is null");
-    //         }
-            
-    //     });
-
-
-    //     call.on('data', function (entry) {
-    //         console.log("call.on('data') triggered with entry: " + entry);
-    //         efs.sendMessage('runData', entry);
-    //         self.got_data = true
-    //     });
-
-    //     call.on('error', function(e) {
-    //         // An error has occurred and the stream has been closed.
-    //         console.log("RPC error: " + e);
-    //       });
-        
-    //     call.on('status', function(st) {
-    //         console.log("status: " + st);
-    //         // this.deepPrintObj(st);
-    //     });
-
-    //     call.on('end', function() {
-    //         console.log("RPC stream end");
-    //         }); 
-
-    //     // for (var entry in call) {
-    //     //     efs.sendMessage('runData', entry);
-    //     //     self.got_data = true
-    //     // }
-    //     // console.log("call:");
-    //     // this.deepPrintObj(call);
-
-
-    // }
-
-
-
     run_composition(
         inputs,
         servePrefs,
@@ -297,8 +218,7 @@ class RPCInterface{
                 )
             }
         );
-        console.log(formatted_inputs, servePrefs)
-        console.log("calling client.RunComposition()");
+
         var call = client.RunComposition(
             {
                 inputs: formatted_inputs,
@@ -308,24 +228,21 @@ class RPCInterface{
 
 
         call.on('data', function (entry) {
-            console.log("call.on('data') triggered with entry: " + entry);
             efs.sendMessage('runData', entry);
             self.got_data = true
         });
 
         call.on('error', function(e) {
-            // An error has occurred and the stream has been closed.
             console.log("RPC error: " + e);
           });
         
         call.on('status', function(st) {
-            console.log("status: " + st);
-            // this.deepPrintObj(st);
+            // console.log("status: " + st);
         });
 
         call.on('end', function() {
             console.log("RPC stream end");
-            }); 
+        }); 
     }
 }
 

@@ -19,7 +19,9 @@ Future planned features include:
 
 (NOTE: See #10 for important usage information)
 
-1. Download code (https://github.com/ezinberg/PsyNeuLinkView)
+1. Download code. Git clone these two repositories into the same directory.
+    1. $ git clone https://github.com/PrincetonUniversity/PsyNeuLink.git
+    2. $ git clone https://github.com/ezinberg/PsyNeuLinkView.git
 
 2. Install dependencies
     1. Node.js (Must be on PATH)

@@ -138,7 +138,10 @@ class FileSystemInterface {
         }
         var config = this.getConfig(),
             configTemplate = JSON.parse(this.read(path.join(__dirname ,'../resources/config-template.json'))),
-            config = keyCopy(configTemplate, config)
+            config = keyCopy(configTemplate, config);
+
+        config["Python"]["PysNeuLink Path"] = path.join(__dirname, "../../..", "PsyNeuLink");
+        
         this.setConfig(config)
     }
 }
