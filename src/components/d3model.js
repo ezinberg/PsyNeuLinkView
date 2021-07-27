@@ -1472,7 +1472,6 @@ class D3model extends React.Component {
             nodes = Object.keys(stylesheet['Graph Settings']['Components']['Nodes']);
             zoom = stylesheet['Canvas Settings']['Zoom'];
             scale = self.props.graphStyle['Graph Settings']['Scale']
-            // *(zoom/100);
             this.scaleGraphInPlace(scale / this.scalingFactor);
             var viewbox = this.getViewBox(),
                 viewboxW = viewbox.width,

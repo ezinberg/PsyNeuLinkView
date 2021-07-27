@@ -20,6 +20,8 @@ import {getComponentMapIdToParameterSet, getComponentMapNameToId} from "../state
 import {addData, registerParameters} from "../state/psyneulink-parameters/actions";
 import {registerComponent} from "../state/psyneulink-components/actions";
 
+const util = require("util");
+
 const fs = window.interfaces.filesystem,
     interp = window.interfaces.interpreter,
     rpcClient = window.interfaces.rpc;
@@ -384,10 +386,17 @@ class WorkSpace extends React.PureComponent {
     // loadScript is for initial script execution,
     // getScriptUpdate is for a topology update after the script was loaded
     getScriptUpdate(filepath) {
+        // console.log("getScriptUpdate(filepath)");
         var self = this;
         var compositions = rpcClient.script_maintainer.compositions;
+
+        // console.log("comps before get_comps: " + compositions);
+
         var composition = compositions[compositions.length - 1];
         rpcClient.get_components(composition);
+
+        // console.log("comps after get_comps: " + compositions);
+
         this.filepath = filepath
         rpcClient.get_json(composition, function (err) {
             if (err) {
@@ -419,6 +428,10 @@ class WorkSpace extends React.PureComponent {
             newGraph = Object.assign({}, JSON.parse(JSON.stringify(rpcClient.script_maintainer.gv))),
             newGraphStyle = Object.assign({}, JSON.parse(JSON.stringify(rpcClient.script_maintainer.style))),
             cf = Object.assign({}, fs.getConfig());
+        
+        // console.log("newGraph:");
+        // console.log(util.inspect(newGraph, false, null, true));
+        
         cf.env.filepath = filepath;
         fs.setConfig(cf);
         this.props.setStyleSheet(newGraphStyle);
