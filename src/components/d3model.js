@@ -81,7 +81,7 @@ class D3model extends React.Component {
                 this.stylesheet = null;
 
                 // ! first attempt at fixing node changing bug
-                // this.props.checkScriptCallback(this.props.filepath);
+                // this.props.checkScriptCallback();
 
                 this.setGraph();
             }
@@ -132,6 +132,9 @@ class D3model extends React.Component {
                 d3.selectAll('svg').remove();
                 this.setState({"spinnerVisible": false});
                 this.stylesheet = null;
+
+                // this.props.checkScriptCallback(this.props.filepath);
+
                 this.setGraph();
             }
         }
@@ -221,7 +224,7 @@ class D3model extends React.Component {
     }
 
     handleStyleDiff(styleDiff) {
-        console.log(util.inspect(styleDiff, false, null, true));
+        // console.log(util.inspect(styleDiff, false, null, true));
         
         this.handleDimensionDiff(styleDiff);
         this.handleScaleDiff(styleDiff);
@@ -1483,7 +1486,7 @@ class D3model extends React.Component {
                 (node) => {
                     pnlvNode = self.index.lookup(node);
 
-                    // if (pnlvNode === null) console.log("null node");
+                    if (pnlvNode === null || pnlvNode === undefined) console.log("null node");
 
                     cx =
                         stylesheet['Graph Settings']['Components']['Nodes'][node].x * (viewboxW + wCorrection) / 100

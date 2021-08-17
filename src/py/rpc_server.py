@@ -218,7 +218,12 @@ def loadScript(filepath):
     namespace = {}
     dg.execute_ast(namespace)
 
+    # print_to_file(namespace)
+
     get_new_pnl_objects(namespace)
+    # (composition, components) = get_new_pnl_objects(namespace)
+    # print_to_file(str(composition) + "  " + str(components))
+
     get_graphics_dict(namespace)
     return pnl_container.hashable_pnl_objects['compositions']
 

@@ -397,7 +397,7 @@ class WorkSpace extends React.PureComponent {
 
         // console.log("comps after get_comps: " + compositions);
 
-        this.filepath = filepath
+        this.filepath = filepath;
         rpcClient.get_json(composition, function (err) {
             if (err) {
                 self.dispatcher.capture({
@@ -489,7 +489,7 @@ class WorkSpace extends React.PureComponent {
             rowTwoH = Math.ceil(w * 0.2)
         }
         if (!v) {
-            v = Math.ceil(h * 0.5)
+            v = Math.ceil(h * 0.75)
         }
         return(
             {
