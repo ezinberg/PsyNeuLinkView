@@ -6,6 +6,9 @@ const initialState = {
     activeParamTab: 'composition',
     inputFile: [],
     stylesheet: {},
+
+    topology: {},
+    
     modelAspectRatio: null,
     plots: {},
     plotSpecs: {},
@@ -28,6 +31,12 @@ export function reducer(state = initialState, action) {
         case atypes.SET_STYLESHEET:
             return Object.assign({}, state, {
                     stylesheet: action.stylesheet
+                }
+            );
+        
+        case atypes.SET_TOPOLOGY:
+            return Object.assign({}, state, {
+                    topology: action.topology
                 }
             );
 

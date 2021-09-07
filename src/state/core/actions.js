@@ -35,6 +35,13 @@ export function setStyleSheet(stylesheet){
     }
 }
 
+export function setTopology(newGraph){
+    return {
+        type: atypes.SET_TOPOLOGY,
+        topology: newGraph
+    }
+}
+
 export function setModelAspectRatio(ratio){
     return {
         type: atypes.SET_MODEL_ASPECT_RATIO,

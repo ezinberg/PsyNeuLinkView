@@ -107,6 +107,27 @@ class RPCInterface{
         });
     }
 
+    // added to reload script topology after changes to script
+    // reload_script(filepath, callback = function () {
+    // }) {
+        
+    //     var client = this.instantiate_client();
+    //     var self = this;
+    //     client.LoadScript({
+    //         path: filepath
+    //     }, function (err, response) {
+    //         // log.debug("client.LoadScript");
+    //         if (err) {
+    //             // log.debug("with err: " + err.stack);
+    //             callback(err)
+    //         } else {
+    //             self.script_maintainer.compositions = response.compositions;
+    //             callback()
+    //         }
+    //     });
+    // }
+
+
     get_style(filepath, callback = function () {
     }) {
         var client = this.instantiate_client();
@@ -133,7 +154,14 @@ class RPCInterface{
             if (err) {
                 callback(err)
             } else {
+
+                // console.log("\n\n\nBEFORE script_maintainer.gv: " + JSON.stringify(self.script_maintainer.gv, null, 4));
+                
                 self.script_maintainer.gv = JSON.parse(response.objectsJSON);
+
+                // ! script_maintainer.gv does not get updated with newly added node
+                // console.log("\nAFTER script_maintainer.gv: " + JSON.stringify(self.script_maintainer.gv, null, 4));
+
                 self.script_maintainer.style = JSON.parse(response.styleJSON);
                 callback()
             }

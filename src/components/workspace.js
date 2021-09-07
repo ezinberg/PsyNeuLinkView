@@ -10,7 +10,7 @@ import ParameterControlBox from './configuration-panel'
 import SettingsPane from './settings'
 import ErrorDispatcher from "../utility/errors/dispatcher";
 import {connect} from "react-redux";
-import {setActiveComposition, setStyleSheet} from "../state/core/actions";
+import {setActiveComposition, setStyleSheet, setTopology} from "../state/core/actions";
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {createId} from "../state/util";
@@ -39,6 +39,9 @@ const mapStateToProps = ({core, psyNeuLinkRegistry, psyNeuLinkComponents}) => {
 
 const mapDispatchToProps = dispatch => ({
     setStyleSheet: graphStyle => {dispatch(setStyleSheet(graphStyle))},
+    
+    setTopology: topology => {dispatch(setTopology(topology))},
+    
     setActiveComposition: name => {dispatch(setActiveComposition(name))},
     registerParameters: ({ownerId, parameterSpecs}) => dispatch(registerParameters({ownerId, parameterSpecs})),
     registerComponent: ({id, name}) => dispatch(registerComponent({id, name})),
@@ -337,6 +340,9 @@ class WorkSpace extends React.PureComponent {
      * @param filepath - filepath from which to load a PNL script
      */
     loadScript(filepath) {
+
+        console.log("loadScript()");
+
         var win;
         var self = this;
         win = window.remote.getCurrentWindow();
@@ -380,24 +386,15 @@ class WorkSpace extends React.PureComponent {
         );
     }
 
-    // callback func passed to d3model.js to be called when the composition
-    // topology has changed in the script (e.g. added a node)
-    // same as loadScript above, but does not call rpcClient.load_script
-    // loadScript is for initial script execution,
-    // getScriptUpdate is for a topology update after the script was loaded
-    getScriptUpdate(filepath) {
-        // console.log("getScriptUpdate(filepath)");
+    getCurrentGV() {
+        console.log("getCurrentGV()");
+
         var self = this;
         var compositions = rpcClient.script_maintainer.compositions;
-
-        // console.log("comps before get_comps: " + compositions);
-
         var composition = compositions[compositions.length - 1];
-        rpcClient.get_components(composition);
 
-        // console.log("comps after get_comps: " + compositions);
+        var newGraph;
 
-        this.filepath = filepath;
         rpcClient.get_json(composition, function (err) {
             if (err) {
                 self.dispatcher.capture({
@@ -412,7 +409,111 @@ class WorkSpace extends React.PureComponent {
                 );
                 return false
             }
-            self.setStateFromRpcClient()
+            else {
+                newGraph = JSON.parse(JSON.stringify(rpcClient.script_maintainer.gv));
+                // return newGraph;
+            }
+        }
+        )
+        
+        newGraph = JSON.parse(JSON.stringify(rpcClient.script_maintainer.gv));
+
+        console.log("newGraph in getCurrentGV(): " + JSON.stringify(newGraph, null, 4))
+        return newGraph;
+    }
+
+    // redsign of callback func for d3model to update script
+    // (redesign of getScriptUpdate) 
+    // reloadScript(filepath) {
+
+    //     console.log("reloadScript()");
+
+    //     var win;
+    //     var self = this;
+    //     win = window.remote.getCurrentWindow();
+    //     self.setState({'filepath':filepath});
+    //     rpcClient.load_script(filepath, (err) => {
+    //             if (err) {
+    //                 self.dispatcher.capture({
+    //                         error: "Python interpreter crashed while loading script. ",
+    //                         message:
+    //                             `Message: ${err.cause !== undefined ?
+    //                                 err.cause.message
+    //                                 :
+    //                                 err.message}`
+    //                     },
+    //                     {graph: null}
+    //                 )
+    //             } else {
+    //                 var compositions = rpcClient.script_maintainer.compositions;
+    //                 var composition = compositions[compositions.length - 1];
+    //                 rpcClient.get_components(composition);
+    //                 this.filepath = filepath
+    //                 rpcClient.get_json(composition, function (err) {
+    //                     if (err) {
+    //                         self.dispatcher.capture({
+    //                                 error: "Python interpreter crashed while loading script.",
+    //                                 message:
+    //                                     `Message: ${err.cause !== undefined ?
+    //                                         err.cause.message
+    //                                         :
+    //                                         err.message}`
+    //                             },
+    //                             {graph: null}
+    //                         );
+    //                         return false
+    //                     }
+    //                     self.setStateFromRpcClient()
+    //                     }
+    //                 )
+    //             }
+    //         }
+    //     );
+    // }
+
+
+    // callback func passed to d3model.js to be called when the composition
+    // topology has changed in the script (e.g. added a node)
+    // same as loadScript above, but does not call rpcClient.load_script
+    // loadScript is for initial script execution,
+    // getCurrentGraphTopology is for a topology update after the script was loaded
+    getCurrentGraphTopology() {
+        console.log("getCurrentGraphTopology()");
+        var self = this;
+
+        var compositions = rpcClient.script_maintainer.compositions;
+        // var compositions = rpcClient.script_maintainer.compositions;
+        
+        var composition = compositions[compositions.length - 1];
+
+        // console.log("composition: " + composition);
+        console.log("components before get_components(): " + this.state.components);
+
+        rpcClient.get_components(composition);
+
+        console.log("components after get_components(): " + this.state.components);
+
+        // this.filepath = filepath;
+        rpcClient.get_json(composition, function (err) {
+            if (err) {
+                self.dispatcher.capture({
+                        error: "Python interpreter crashed while loading script.",
+                        message:
+                            `Message: ${err.cause !== undefined ?
+                                err.cause.message
+                                :
+                                err.message}`
+                    },
+                    {graph: null}
+                );
+                return false
+            }
+            else {
+                var newGraph = JSON.parse(JSON.stringify(rpcClient.script_maintainer.gv));
+                self.props.setTopology(newGraph);
+            }
+            // comment this step out to prevent infinite recursion?
+            // self.setStateFromRpcClient()
             }
         )
     }
@@ -421,6 +522,9 @@ class WorkSpace extends React.PureComponent {
      * Gets Composition, graph, and graph style from RPC and registers it with redux store
      */
     setStateFromRpcClient(){
+        
+        console.log("setStateFromRpcClient()");
+        
         var self = this,
             filepath = this.filepath,
             compositions = rpcClient.script_maintainer.compositions,
@@ -429,11 +533,14 @@ class WorkSpace extends React.PureComponent {
             newGraphStyle = Object.assign({}, JSON.parse(JSON.stringify(rpcClient.script_maintainer.style))),
             cf = Object.assign({}, fs.getConfig());
         
-        // console.log("newGraph:");
-        // console.log(util.inspect(newGraph, false, null, true));
+        console.log("newGraph:");
+        console.log(JSON.stringify(newGraph.objects, null, 4));
         
         cf.env.filepath = filepath;
         fs.setConfig(cf);
+
+        this.props.setTopology(newGraph);
+
         this.props.setStyleSheet(newGraphStyle);
         this.props.setActiveComposition(composition);
         self.setState({
@@ -447,8 +554,22 @@ class WorkSpace extends React.PureComponent {
 
         // self.getCurrentGraphStyle();
 
+        // var fsWait = false;
+
         fs.watch(filepath, (e)=>{
+
+            // if (fsWait) return;
+            // fsWait = setTimeout(() => {
+            //     fsWait = false;
+            // }, 100);
+
             window.dispatchEvent(new Event(e));
+
+            // will get called with any change to pnl script?
+            // self.loadScript(filepath);
+
+            self.getCurrentGraphTopology();
+
             self.getCurrentGraphStyle()
         });
         window.remote.getCurrentWindow().setTitle(`${composition} \u2014 ${filepath}`)
@@ -755,7 +876,7 @@ class WorkSpace extends React.PureComponent {
                     filepath = {this.state.filepath}
                     graphSizeFx = {this.setGraphSize}
 
-                    checkScriptCallback = {this.getScriptUpdate.bind(this)}
+                    checkScriptCallback = {this.getCurrentGV.bind(this)}
                 />
             </div>,
             plotter =  <div key="plotter">

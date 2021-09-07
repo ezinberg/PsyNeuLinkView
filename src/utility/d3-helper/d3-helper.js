@@ -81,6 +81,9 @@ export class Index {
     }
 
     add_node(node) {
+
+        console.log("add_node() added: " + node.name);
+
         var pnlv_node, afferent, efferent;
         pnlv_node = node._is_pnlv_obj ? node : new Node(node);
         this.add_to_elements(pnlv_node);

@@ -11,6 +11,7 @@ from collections import defaultdict
 import ast_parse
 import threading
 import warnings
+import copy
 
 
 f = None
@@ -144,6 +145,13 @@ class GraphServer(graph_pb2_grpc.ServeGraphServicer):
 
 pnl_container = Container()
 
+def expand_path(filepath):
+    if '~' in filepath:
+        homedir = os.path.expanduser('~')
+        filepath = homedir + filepath[1:]
+        # print_to_file("filepath expanded to: " + filepath)
+    return filepath
+
 def get_current_composition():
     # gets currently selected composition. currently just takes the last one in the list of instantiated comps.
     # needs to be improved
@@ -195,7 +203,14 @@ def get_graphics_dict(namespace):
         pnl_container.graphics_spec = namespace['pnlv_graphics_spec']
 
 def load_style(filepath):
-    file = open(filepath, 'r').read()
+
+    filepath = expand_path(filepath)
+
+    with open(filepath, 'r') as fi:
+        fi.seek(0)
+        file = fi.read()
+
+    # file = open(filepath, 'r').read()
     ast = redbaron.RedBaron(file)
     gdict = ast.find('assign',lambda x: x.find('name','pnlv_graphics_spec'))
     namespace = {}
@@ -206,13 +221,28 @@ def load_style(filepath):
         pnl_container.graphics_spec = {}
 
 def loadScript(filepath):
+
+    filepath = expand_path(filepath)
+
     pnl_container.filepath = filepath
 
     try:
         with open(filepath, 'r') as f:
+
+            # reset cursor to start of file for multiple reads
+            f.seek(0)
+
             pnl_container.AST = f.read()
+
+            if pnl_container.AST.isspace() or (pnl_container.AST == ""):
+                print_to_file("Source file for AST is empty or has already been read")
+            if pnl_container.AST == None:
+                print_to_file("pnl_container.AST is None")
+    
     except:
-        print_to_file("error reading ast from file")
+        e = sys.exc_info()[0]
+        print_to_file("error reading ast from file: " + str(e))
+        print_to_file("filepath: " + filepath + '\n')
 
     dg = ast_parse.DependencyGraph(pnl_container.AST, pnl)
     namespace = {}
@@ -228,6 +258,31 @@ def loadScript(filepath):
     return pnl_container.hashable_pnl_objects['compositions']
 
 def update_graphics_dict(styleSheet):
+
+    # reads the file immediately before updating script
+    # so that the AST written back to the script includes any 
+    # changes made since the script was read on start
+    filepath = pnl_container.filepath
+    try:
+        with open(filepath, 'r') as f:
+
+            # reset cursor to start of file for multiple reads
+            f.seek(0)
+
+            pnl_container.AST = f.read()
+
+            if pnl_container.AST.isspace() or (pnl_container.AST == ""):
+                print_to_file("Source file for AST is empty or has already been read")
+            if pnl_container.AST == None:
+                print_to_file("pnl_container.AST is None")
+    
+    except:
+        e = sys.exc_info()[0]
+        print_to_file("error reading ast from file: " + str(e))
+        print_to_file("filepath: " + filepath + '\n')
+
+
+
     ast = redbaron.RedBaron(pnl_container.AST)
     gdict = ast.find('assign',lambda x: x.find('name','pnlv_graphics_spec'))
     stylesheet_str = json.dumps(styleSheet, indent=4)
@@ -236,7 +291,19 @@ def update_graphics_dict(styleSheet):
         ast = ast.dumps()
     else:
         ast = ast.dumps() + f'\n# PsyNeuLinkView Graphics Info \npnlv_graphics_spec = {stylesheet_str}\n'
+    
+    old_ast = copy.deepcopy(pnl_container.AST)
+
+    if str(old_ast) == str(ast):
+        print_to_file("old_ast and ast are SAME")
+    else:
+        print_to_file("old_ast and ast are DIFFERENT")
+
+    # print_to_file("old ast:\n" + str(old_ast))
+    # print_to_file("new ast:\n" + str(ast))
+
     pnl_container.AST = ast
+
     with open(pnl_container.filepath, 'w') as script:
         script.write(ast)
 

@@ -66,6 +66,8 @@ class D3model extends React.Component {
         this.updateScript = _.debounce(this.updateScript, 100)
         this.setDirtyFlagToFalse = _.debounce(this.setDirtyFlagToFalse, 200)
         this.onResize = _.debounce(this.onResize, 100)
+
+        // this.props.checkScriptCallback = _.debounce(this.props.checkScriptCallback, 100);
     }
 
     // lifecycle methods
@@ -81,7 +83,7 @@ class D3model extends React.Component {
                 this.stylesheet = null;
 
                 // ! first attempt at fixing node changing bug
-                // this.props.checkScriptCallback();
+                // this.props.graph = this.props.checkScriptCallback();
 
                 this.setGraph();
             }
@@ -133,7 +135,7 @@ class D3model extends React.Component {
                 this.setState({"spinnerVisible": false});
                 this.stylesheet = null;
 
-                // this.props.checkScriptCallback(this.props.filepath);
+                // this.props.checkScriptCallback();
 
                 this.setGraph();
             }
@@ -321,6 +323,7 @@ class D3model extends React.Component {
         if ('Graph Settings' in styleDiff) {
             if ('Components' in styleDiff['Graph Settings']) {
                 graphSS['Components'] = componentsProps;
+                console.log("componentsProps: " + JSON.stringify(componentsProps, null, 4));
                 this.setNodePositioningFromStylesheet();
             }
         }
@@ -564,6 +567,26 @@ class D3model extends React.Component {
         );
     }
 
+    // associateVisualInformationWithGraphNodes(nodes) {
+    //     nodes.forEach(function (d) {
+    //             d.x = parseInt(Math.abs(d.text.x));
+    //             d.y = parseInt(Math.abs(d.text.y));
+    //             if ('ellipse' in d) {
+    //                 d.color = d.ellipse.stroke;
+    //                 if ('stroke-width' in d.ellipse) {
+    //                     d.strokeWidth = parseInt(d.ellipse['stroke-width'])
+    //                 } else {
+    //                     d.strokeWidth = 1
+    //                 }
+    //             } else {
+    //                 d.color = d.polygon.stroke;
+    //             }
+    //             d.name = d.title;
+    //         }
+    //     );
+    //     return nodes;
+    // }
+
     associateVisualInformationWithGraphEdges() {
         var self = this;
         this.props.graph.edges.forEach(function (d) {
@@ -573,14 +596,33 @@ class D3model extends React.Component {
         });
     }
 
+    // associateVisualInformationWithGraphEdges(edges) {
+    //     var self = this;
+    //     edges.forEach(function (d) {
+    //         d.tailNode = self.props.graph.objects[d.tail];
+    //         d.headNode = self.props.graph.objects[d.head];
+    //         d.color = d.path.stroke;
+    //     });
+    //     return edges;
+    // }
+
     drawProjections(container) {
         var self = this;
+
+        var currGraph = this.props.checkScriptCallback();
+        console.log("currGraph.edges in drawProjections: " + JSON.stringify(currGraph.edges, null, 4));
+        console.log("self.props.graph.edges in drawProjections: " + JSON.stringify(self.props.graph.edges, null, 4));
+
+        
         self.associateVisualInformationWithGraphEdges();
+        // var newEdges = self.associateVisualInformationWithGraphEdges(currGraph.edges);
         var id = 0;
         var edge = container.append('g')
             .attr('class', 'edge')
             .selectAll('line')
             .data(self.props.graph.edges)
+            // .data(currGraph.edges)
+            // .data(newEdges)
             .enter()
             .append('line')
             .attr('id', function (d) {
@@ -655,10 +697,21 @@ class D3model extends React.Component {
         var nodeHeight = self.state.nodeHeight;
         self.associateVisualInformationWithGraphNodes();
         var id = 0;
+
+        console.log("(drawNodes) this.props.graph: " + JSON.stringify(this.props.graph, null, 4));
+
+        var currGraph = this.props.checkScriptCallback();
+        console.log("currGraph in drawNodes: " + JSON.stringify(currGraph, null, 4));
+
+        // var newG = self.associateVisualInformationWithGraphNodes(currGraph.objects);
+
+
         var node = container.append('g')
             .attr('class', 'node')
             .selectAll('ellipse')
+            // .data(currGraph)
             .data(this.props.graph.objects)
+            // .data(newG)
             .enter()
             .append('ellipse')
             .attr('id', function (d) {
@@ -701,6 +754,8 @@ class D3model extends React.Component {
             });
         this.index.addD3Group(node, 'node');
         this.node = node
+
+        console.log("drawNodes() added node: " + node.name);
     }
 
     drawLabels(container, labelDragFunction) {
@@ -793,6 +848,7 @@ class D3model extends React.Component {
     resizeNodesToLabelText() {
         this.index.nodes.forEach(
             (node) => {
+                console.log("(resize) node: " + JSON.stringify(node, null, 4));
                 var labelRadius = Math.floor((node.label.dom.getBoundingClientRect().width / 2) + 10);
                 node.data.rx = labelRadius;
                 node.selection.attr('rx', labelRadius);
@@ -935,7 +991,12 @@ class D3model extends React.Component {
         self = this;
         this.index.projections.forEach(
             (projection) => {
-                offsetPt = self.getOffsetPointsForProjection(projection);
+                if ('x' in projection) {
+                    offsetPt = self.getOffsetPointsForProjection(projection);
+                }
+                else {
+                    offsetPt = self.getOffsetPointsForProjection(projection.data);
+                }
                 projection.selection
                     .attr('x2', offsetPt.x)
                     .attr('y2', offsetPt.y)
@@ -944,14 +1005,29 @@ class D3model extends React.Component {
     }
 
     getOffsetPointsForProjection(projection) {
-        return this.getOffsetBetweenEllipses(
-            projection.tailNode.data.x,
-            projection.tailNode.data.y,
-            projection.headNode.data.x,
-            projection.headNode.data.y,
-            projection.headNode.data.rx,
-            projection.headNode.data.ry,
-            projection.headNode.data.strokeWidth)
+        console.log("projection: " + JSON.stringify(projection, null, 4));
+
+        if ('data' in projection.tailNode) {
+            return this.getOffsetBetweenEllipses(
+                projection.tailNode.data.x,
+                projection.tailNode.data.y,
+                projection.headNode.data.x,
+                projection.headNode.data.y,
+                projection.headNode.data.rx,
+                projection.headNode.data.ry,
+                projection.headNode.data.strokeWidth)
+        }
+        else {
+            return this.getOffsetBetweenEllipses(
+                projection.tailNode.x,
+                projection.tailNode.y,
+                projection.headNode.x,
+                projection.headNode.y,
+                projection.headNode.ellipse.rx,
+                projection.headNode.ellipse.ry,
+                projection.headNode.ellipse.strokeWidth)
+        }
+        
     }
 
     getViewportOffset() {
@@ -1484,7 +1560,12 @@ class D3model extends React.Component {
                 hCorrection = viewportOffset.y;
             nodes.forEach(
                 (node) => {
+
+                    console.log("looking up node: " + node);
+
                     pnlvNode = self.index.lookup(node);
+
+                    // console.log("pnlvNode: " + JSON.stringify(pnlvNode, null, 4));
 
                     if (pnlvNode === null || pnlvNode === undefined) console.log("null node");
 
