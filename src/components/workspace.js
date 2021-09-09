@@ -415,7 +415,7 @@ class WorkSpace extends React.PureComponent {
             }
         }
         )
-        
+
         newGraph = JSON.parse(JSON.stringify(rpcClient.script_maintainer.gv));
 
         console.log("newGraph in getCurrentGV(): " + JSON.stringify(newGraph, null, 4))
@@ -568,7 +568,7 @@ class WorkSpace extends React.PureComponent {
             // will get called with any change to pnl script?
             // self.loadScript(filepath);
 
-            self.getCurrentGraphTopology();
+            // self.getCurrentGraphTopology();
 
             self.getCurrentGraphStyle()
         });

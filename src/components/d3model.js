@@ -609,8 +609,8 @@ class D3model extends React.Component {
     drawProjections(container) {
         var self = this;
 
-        var currGraph = this.props.checkScriptCallback();
-        console.log("currGraph.edges in drawProjections: " + JSON.stringify(currGraph.edges, null, 4));
+        // var currGraph = this.props.checkScriptCallback();
+        // console.log("currGraph.edges in drawProjections: " + JSON.stringify(currGraph.edges, null, 4));
         console.log("self.props.graph.edges in drawProjections: " + JSON.stringify(self.props.graph.edges, null, 4));
 
         
@@ -700,8 +700,8 @@ class D3model extends React.Component {
 
         console.log("(drawNodes) this.props.graph: " + JSON.stringify(this.props.graph, null, 4));
 
-        var currGraph = this.props.checkScriptCallback();
-        console.log("currGraph in drawNodes: " + JSON.stringify(currGraph, null, 4));
+        // var currGraph = this.props.checkScriptCallback();
+        // console.log("currGraph in drawNodes: " + JSON.stringify(currGraph, null, 4));
 
         // var newG = self.associateVisualInformationWithGraphNodes(currGraph.objects);
 
