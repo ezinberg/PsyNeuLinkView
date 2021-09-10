@@ -98,6 +98,12 @@ const structureData = [
       {
         id: 0,
         label: 'Control Mechanism',
+        // label:
+        //   <div>
+        //       <DraggableTreeNode
+        //         id={0}
+        //         label={'Control Mechanism'}/>
+        //     </div>,
         icon: 'cog'
       },
       {
