@@ -2,12 +2,12 @@ import psyneulink as pnl
 
 input = pnl.ProcessingMechanism(name='input')
 mid = pnl.ProcessingMechanism(name='mid', function=pnl.Linear(slope=2))
-# hid = pnl.ProcessingMechanism(name='hid', function=pnl.Linear(slope=2))
+hid = pnl.ProcessingMechanism(name='hid', function=pnl.Linear(slope=2))
 # kid = pnl.ProcessingMechanism(name='kid', function=pnl.Linear(slope=2))
 output = pnl.ProcessingMechanism(name='output', function=pnl.Linear(slope=2))
 
 comp = pnl.Composition(
-    pathways=[input, mid, output]
+    pathways=[[input, mid], [hid, output]]
 )
 
 
@@ -25,27 +25,31 @@ pnlv_graphics_spec = {
         "Height": ""
     },
     "Canvas Settings": {
-        "Width": 78.75,
+        "Width": 78.96,
         "Height": 73.72,
-        "Zoom": 100,
+        "Zoom": 1,
         "xScroll": 0,
         "yScroll": 0
     },
     "Graph Settings": {
-        "Scale": 2.73,
+        "Scale": null,
         "Components": {
             "Nodes": {
                 "input": {
-                    "x": 22.68,
-                    "y": 26.97
+                    "x": null,
+                    "y": null
                 },
                 "mid": {
-                    "x": 21.33,
-                    "y": 51.79
+                    "x": null,
+                    "y": null
                 },
                 "output": {
-                    "x": 42.59,
-                    "y": 60.48
+                    "x": null,
+                    "y": null
+                },
+                "hid": {
+                    "x": null,
+                    "y": null
                 }
             }
         }

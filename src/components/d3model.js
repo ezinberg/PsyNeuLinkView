@@ -611,7 +611,7 @@ class D3model extends React.Component {
 
         // var currGraph = this.props.checkScriptCallback();
         // console.log("currGraph.edges in drawProjections: " + JSON.stringify(currGraph.edges, null, 4));
-        console.log("self.props.graph.edges in drawProjections: " + JSON.stringify(self.props.graph.edges, null, 4));
+        // console.log("self.props.graph.edges in drawProjections: " + JSON.stringify(self.props.graph.edges, null, 4));
 
         
         self.associateVisualInformationWithGraphEdges();
@@ -748,6 +748,29 @@ class D3model extends React.Component {
                     self.updateScript()
                 })
             )
+            .on("dblclick", (d) => {
+                console.log("double clicked " + d.name);
+            })
+
+            .each(function() {
+                var sel = d3.select(this);
+                var state = false;
+                sel.on('dblclick', function() {
+                  state = !state;
+                  if (state) {
+                    sel.style('stroke', 'black');
+                    sel.text(function (d) {
+                        return d.name.toUpperCase()
+                    })
+                  } else {
+                    sel.style('stroke', function(d) { return d.color; });
+                    sel.text(function (d) {
+                        return d.name.toLowerCase()
+                    })
+                  }
+                }) 
+            })
+
             .on('click', (d) => {
                 this.unselectAll();
                 this.selectNode(this.index.lookup(d))
@@ -787,6 +810,30 @@ class D3model extends React.Component {
                     self.updateScript()
                 })
             )
+            .on("dblclick", (d) => {
+                console.log("dbl clicked label");
+                return d.name.toUpperCase()
+            })
+
+            .each(function() {
+                var sel = d3.select(this);
+                var state = false;
+                sel.on('dblclick', function() {
+                  state = !state;
+                  if (state) {
+                    // sel.style('stroke', 'black');
+                    sel.text(function (d) {
+                        return d.name.toUpperCase()
+                    })
+                  } else {
+                    // sel.style('stroke', function(d) { return d.color; });
+                    sel.text(function (d) {
+                        return d.name.toLowerCase()
+                    })
+                  }
+                }) 
+            })
+
             .on('click', (d) => {
                 this.unselectAll();
                 this.selectNode(this.index.lookup(d))
@@ -848,7 +895,7 @@ class D3model extends React.Component {
     resizeNodesToLabelText() {
         this.index.nodes.forEach(
             (node) => {
-                console.log("(resize) node: " + JSON.stringify(node, null, 4));
+                // console.log("(resize) node: " + JSON.stringify(node, null, 4));
                 var labelRadius = Math.floor((node.label.dom.getBoundingClientRect().width / 2) + 10);
                 node.data.rx = labelRadius;
                 node.selection.attr('rx', labelRadius);
@@ -1005,7 +1052,7 @@ class D3model extends React.Component {
     }
 
     getOffsetPointsForProjection(projection) {
-        console.log("projection: " + JSON.stringify(projection, null, 4));
+        // console.log("projection: " + JSON.stringify(projection, null, 4));
 
         if ('data' in projection.tailNode) {
             return this.getOffsetBetweenEllipses(
@@ -1561,7 +1608,7 @@ class D3model extends React.Component {
             nodes.forEach(
                 (node) => {
 
-                    console.log("looking up node: " + node);
+                    // console.log("looking up node: " + node);
 
                     pnlvNode = self.index.lookup(node);
 

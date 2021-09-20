@@ -86,6 +86,8 @@ class WorkSpace extends React.PureComponent {
         this.setMenu();
         this.setupIpcEvents();
         this.rpcClient = rpcClient;
+
+        this.idToParams = null;
     }
 
     bindThisToFunctions(){
@@ -149,6 +151,9 @@ class WorkSpace extends React.PureComponent {
                 addData({id: id, data: message})
             }
         }
+
+        this.idToParams = idToParameters;
+        console.log("idToParams: " + JSON.stringify(this.idToParams, null, 4));
     }
 
     /**
@@ -170,6 +175,9 @@ class WorkSpace extends React.PureComponent {
             parameterSpecs[id] = p
         });
         this.props.registerParameters({ownerId: ownerId, parameterSpecs: parameterSpecs})
+
+        // console.log(JSON.stringify({ownerId: ownerId, parameterSpecs: parameterSpecs}, null, 4));
+
     }
 
     /**

@@ -262,24 +262,25 @@ def update_graphics_dict(styleSheet):
     # reads the file immediately before updating script
     # so that the AST written back to the script includes any 
     # changes made since the script was read on start
-    filepath = pnl_container.filepath
-    try:
-        with open(filepath, 'r') as f:
-
-            # reset cursor to start of file for multiple reads
-            f.seek(0)
-
-            pnl_container.AST = f.read()
-
-            if pnl_container.AST.isspace() or (pnl_container.AST == ""):
-                print_to_file("Source file for AST is empty or has already been read")
-            if pnl_container.AST == None:
-                print_to_file("pnl_container.AST is None")
     
-    except:
-        e = sys.exc_info()[0]
-        print_to_file("error reading ast from file: " + str(e))
-        print_to_file("filepath: " + filepath + '\n')
+    # filepath = pnl_container.filepath
+    # try:
+    #     with open(filepath, 'r') as f:
+
+    #         # reset cursor to start of file for multiple reads
+    #         f.seek(0)
+
+    #         pnl_container.AST = f.read()
+
+    #         if pnl_container.AST.isspace() or (pnl_container.AST == ""):
+    #             print_to_file("Source file for AST is empty or has already been read")
+    #         if pnl_container.AST == None:
+    #             print_to_file("pnl_container.AST is None")
+    
+    # except:
+    #     e = sys.exc_info()[0]
+    #     print_to_file("error reading ast from file: " + str(e))
+    #     print_to_file("filepath: " + filepath + '\n')
 
 
 
@@ -366,6 +367,13 @@ def get_gv_json(name):
                                                                     show_learning=True,
                                                                     show_controller=True
                                                                     )
+   
+    # gv = pnl_container.pnl_objects['compositions'][comp].show_graph(output_fmt='gv',
+    #                                                                 show_learning=True,
+    #                                                                 show_controller=True,
+    #                                                                 show_node_structure='ALL'
+    #                                                                 )
+
     gv_svg = gv.pipe(format='svg')
     gv_svg_dict = etree_to_dict(fromstring(gv_svg.decode()))
     correct_dict(gv_svg_dict)
