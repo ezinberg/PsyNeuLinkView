@@ -104,17 +104,17 @@ const structureData = [
         //         id={0}
         //         label={'Control Mechanism'}/>
         //     </div>,
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 1,
         label: 'Optimization Control Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 2,
         label: 'Control Projection',
-        icon: 'inheritance'
+        icon: 'arrow-bottom-right'
       },
     ]
   },
@@ -124,12 +124,12 @@ const structureData = [
       {
         id: 3,
         label: 'Gating Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 4,
         label: 'Gating Projection',
-        icon: 'inheritance'
+        icon: 'arrow-bottom-right'
       }
     ]
   },
@@ -139,12 +139,12 @@ const structureData = [
       {
         id: 5,
         label: 'Learning Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 6,
         label: 'Learning Projection',
-        icon: 'inheritance'
+        icon: 'arrow-bottom-right'
       }
     ]
   },
@@ -154,32 +154,32 @@ const structureData = [
       {
         id: 7,
         label: 'Integrator Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 8,
         label: 'Objective Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 9,
         label: 'Processing Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 10,
         label: 'Transfer Mechanism',
-        icon: 'cog'
+        icon: 'square'
       },
       {
         id: 11,
         label: 'Mapping Projection',
-        icon: 'inheritance'
+        icon: 'arrow-bottom-right'
       },
       {
         id: 12,
         label: 'Pathway Projection',
-        icon: 'inheritance'
+        icon: 'arrow-bottom-right'
       },
     ]
   },

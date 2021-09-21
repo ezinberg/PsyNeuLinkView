@@ -160,7 +160,7 @@ class RPCInterface{
                 self.script_maintainer.gv = JSON.parse(response.objectsJSON);
 
                 // ! script_maintainer.gv does not get updated with newly added node
-                // console.log("\nAFTER script_maintainer.gv: " + JSON.stringify(self.script_maintainer.gv, null, 4));
+                console.log("\nAFTER script_maintainer.gv: " + JSON.stringify(self.script_maintainer.gv, null, 4));
 
                 self.script_maintainer.style = JSON.parse(response.styleJSON);
                 callback()

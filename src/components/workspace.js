@@ -153,7 +153,7 @@ class WorkSpace extends React.PureComponent {
         }
 
         this.idToParams = idToParameters;
-        console.log("idToParams: " + JSON.stringify(this.idToParams, null, 4));
+        // console.log("idToParams: " + JSON.stringify(this.idToParams, null, 4));
     }
 
     /**
@@ -176,7 +176,7 @@ class WorkSpace extends React.PureComponent {
         });
         this.props.registerParameters({ownerId: ownerId, parameterSpecs: parameterSpecs})
 
-        // console.log(JSON.stringify({ownerId: ownerId, parameterSpecs: parameterSpecs}, null, 4));
+        console.log(JSON.stringify(message, null, 4));
 
     }
 
