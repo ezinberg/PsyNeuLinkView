@@ -9,6 +9,9 @@ const log = require('electron-log'),
 
 class RPCInterface{
     constructor() {
+
+        console.log("ifs.getConfig()['Python']['PsyNeuLink Path'] is : " + ifs.getConfig()['Python']['PsyNeuLink Path']);
+
         const PROTO_PATH = path.join(ifs.getConfig()['Python']['PsyNeuLink Path'], 'psyneulink/core/rpc/graph.proto');
         this.packageDefinition = protoloader.loadSync(
             PROTO_PATH,

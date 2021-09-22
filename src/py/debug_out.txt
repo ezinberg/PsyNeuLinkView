@@ -523,3 +523,17 @@ old_ast and ast are DIFFERENT
 old_ast and ast are DIFFERENT
 old_ast and ast are DIFFERENT
 old_ast and ast are DIFFERENT
+old_ast and ast are DIFFERENT
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are SAME
+old_ast and ast are DIFFERENT
+old_ast and ast are SAME
