@@ -25,27 +25,27 @@ pnlv_graphics_spec = {
         "Height": ""
     },
     "Canvas Settings": {
-        "Width": 78.68,
-        "Height": 73.72,
+        "Width": 78.61,
+        "Height": 65.18,
         "Zoom": 100,
         "xScroll": 0,
         "yScroll": 0
     },
     "Graph Settings": {
-        "Scale": 3.21,
+        "Scale": 2,
         "Components": {
             "Nodes": {
                 "input": {
-                    "x": 42.68,
-                    "y": -0.97
+                    "x": 38.3,
+                    "y": 14.57
                 },
                 "mid": {
-                    "x": 44.4,
-                    "y": 40.78
+                    "x": 46.82,
+                    "y": 43.76
                 },
                 "output": {
-                    "x": 41.78,
-                    "y": 78.98
+                    "x": 34.56,
+                    "y": 69.97
                 }
             }
         }

@@ -91,7 +91,7 @@ class SidebarSelect extends React.Component {
 }
 
 
-const structureData = [
+const structureDataOld = [
   {
     categoryName: 'Control',
     components: [
@@ -185,6 +185,143 @@ const structureData = [
   },
 ];
 
+
+
+
+
+
+const structureDataNew = [
+  // {
+  //   categoryName: 'Processing',
+  //   components: [
+  //     {
+  //       id: 0,
+  //       label: 'Control Mechanism',
+  //       // label:
+  //       //   <div>
+  //       //       <DraggableTreeNode
+  //       //         id={0}
+  //       //         label={'Control Mechanism'}/>
+  //       //     </div>,
+  //       icon: 'square'
+  //     },
+  //     {
+  //       id: 1,
+  //       label: 'Optimization Control Mechanism',
+  //       icon: 'square'
+  //     },
+  //     {
+  //       id: 2,
+  //       label: 'Control Projection',
+  //       icon: 'arrow-bottom-right'
+  //     },
+  //   ]
+  // },
+  {
+    categoryName: 'Modulatory',
+    components: [
+
+      {
+        id: 0,
+        label: 'Control Mechanism',
+        // label:
+        //   <div>
+        //       <DraggableTreeNode
+        //         id={0}
+        //         label={'Control Mechanism'}/>
+        //     </div>,
+        icon: 'square'
+      },
+      {
+        id: 1,
+        label: 'Optimization Control Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 2,
+        label: 'Control Projection',
+        icon: 'arrow-bottom-right'
+      },
+
+      {
+        id: 3,
+        label: 'Gating Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 4,
+        label: 'Gating Projection',
+        icon: 'arrow-bottom-right'
+      },
+      {
+        id: 5,
+        label: 'Learning Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 6,
+        label: 'Learning Projection',
+        icon: 'arrow-bottom-right'
+      }
+    ]
+  },
+  // {
+  //   categoryName: 'Learning',
+  //   components: [
+  //     {
+  //       id: 5,
+  //       label: 'Learning Mechanism',
+  //       icon: 'square'
+  //     },
+  //     {
+  //       id: 6,
+  //       label: 'Learning Projection',
+  //       icon: 'arrow-bottom-right'
+  //     }
+  //   ]
+  // },
+  {
+    categoryName: 'Processing',
+    components: [
+      {
+        id: 7,
+        label: 'Integrator Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 8,
+        label: 'Objective Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 9,
+        label: 'Processing Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 10,
+        label: 'Transfer Mechanism',
+        icon: 'square'
+      },
+      {
+        id: 11,
+        label: 'Mapping Projection',
+        icon: 'arrow-bottom-right'
+      },
+      {
+        id: 12,
+        label: 'Pathway Projection',
+        icon: 'arrow-bottom-right'
+      },
+    ]
+  },
+];
+
+
+
+
+
+
 const plottingData = [
   {categoryName: 'Plots',
     components: [
@@ -219,7 +356,12 @@ class SideBar extends React.Component {
     var nodes, listHeader;
     const connectDropTarget = this.props.connectDropTarget;
     if (this.props.activeView === 'graphview'){
-        nodes = structureData;
+        // nodes = structureDataOld;
+
+
+        nodes = structureDataNew;
+        
+        
         listHeader = <SidebarSelect
             size = {this.props.size}/>}
     else {
