@@ -19,35 +19,4 @@ print(comp.run(inputs=[10, 1, 2, 3, 4, 5, 10, 7]))
 comp.show_graph(show_node_structure='ALL')
 
 # PsyNeuLinkView Graphics Info 
-pnlv_graphics_spec = {
-    "Window Settings": {
-        "Width": "",
-        "Height": ""
-    },
-    "Canvas Settings": {
-        "Width": 78.61,
-        "Height": 65.18,
-        "Zoom": 100,
-        "xScroll": 0,
-        "yScroll": 0
-    },
-    "Graph Settings": {
-        "Scale": 2,
-        "Components": {
-            "Nodes": {
-                "input": {
-                    "x": 38.3,
-                    "y": 14.57
-                },
-                "mid": {
-                    "x": 46.82,
-                    "y": 43.76
-                },
-                "output": {
-                    "x": 34.56,
-                    "y": 69.97
-                }
-            }
-        }
-    }
-}
+pnlv_graphics_spec = {}

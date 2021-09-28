@@ -548,6 +548,7 @@ class D3model extends React.Component {
         );
     }
 
+    // ! modify this to accept non-elliptical objects for showing node structure?
     associateVisualInformationWithGraphNodes() {
         this.props.graph.objects.forEach(function (d) {
                 d.x = parseInt(Math.abs(d.text.x));
@@ -691,6 +692,8 @@ class D3model extends React.Component {
         self.index.addD3Group(recurrent, 'projection');
     }
 
+
+    // ! modify this to draw node-structure nodes
     drawNodes(container, nodeDragFunction) {
         var self = this;
         var nodeWidth = self.state.nodeWidth;
@@ -1052,7 +1055,9 @@ class D3model extends React.Component {
     }
 
     getOffsetPointsForProjection(projection) {
-        // console.log("projection: " + JSON.stringify(projection, null, 4));
+        console.log("projection.headNode: " + JSON.stringify(projection.headNode, null, 4));
+        console.log("projection.tailNode: " + JSON.stringify(projection.tailNode, null, 4));
+
 
         if ('data' in projection.tailNode) {
             return this.getOffsetBetweenEllipses(
@@ -1064,7 +1069,17 @@ class D3model extends React.Component {
                 projection.headNode.data.ry,
                 projection.headNode.data.strokeWidth)
         }
-        else {
+        // else {
+        //     return this.getOffsetBetweenEllipses(
+        //         projection.tailNode.x,
+        //         projection.tailNode.y,
+        //         projection.headNode.x,
+        //         projection.headNode.y,
+        //         projection.headNode.ellipse.rx,
+        //         projection.headNode.ellipse.ry,
+        //         projection.headNode.ellipse.strokeWidth)
+        // }
+        else if ('ellipse' in projection.headNode) {
             return this.getOffsetBetweenEllipses(
                 projection.tailNode.x,
                 projection.tailNode.y,
@@ -1073,6 +1088,16 @@ class D3model extends React.Component {
                 projection.headNode.ellipse.rx,
                 projection.headNode.ellipse.ry,
                 projection.headNode.ellipse.strokeWidth)
+        }
+        else {
+            return this.getOffsetBetweenEllipses(
+                projection.tailNode.x,
+                projection.tailNode.y,
+                projection.headNode.x,
+                projection.headNode.y,
+                projection.headNode.rx,
+                projection.headNode.ry,
+                projection.headNode.strokeWidth)
         }
         
     }

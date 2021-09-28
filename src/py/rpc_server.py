@@ -234,10 +234,10 @@ def loadScript(filepath):
 
             pnl_container.AST = f.read()
 
-            if pnl_container.AST.isspace() or (pnl_container.AST == ""):
-                print_to_file("Source file for AST is empty or has already been read")
-            if pnl_container.AST == None:
-                print_to_file("pnl_container.AST is None")
+            # if pnl_container.AST.isspace() or (pnl_container.AST == ""):
+            #     print_to_file("Source file for AST is empty or has already been read")
+            # if pnl_container.AST == None:
+            #     print_to_file("pnl_container.AST is None")
     
     except:
         e = sys.exc_info()[0]
@@ -295,10 +295,10 @@ def update_graphics_dict(styleSheet):
     
     old_ast = copy.deepcopy(pnl_container.AST)
 
-    if str(old_ast) == str(ast):
-        print_to_file("old_ast and ast are SAME")
-    else:
-        print_to_file("old_ast and ast are DIFFERENT")
+    # if str(old_ast) == str(ast):
+    #     print_to_file("old_ast and ast are SAME")
+    # else:
+    #     print_to_file("old_ast and ast are DIFFERENT")
 
     # print_to_file("old ast:\n" + str(old_ast))
     # print_to_file("new ast:\n" + str(ast))
@@ -352,9 +352,17 @@ def get_gv_json(name):
                 objects.append(i)
             elif i['class'] == 'edge':
                 tail_str, head_str = i['title'].split('->')
+
+                print_to_file(tail_str + ", " + head_str)
+                print_to_file(json.dumps(objects, indent=4))
+
                 del i['title']
-                i['tail'] = [i for i in range(len(objects)) if objects[i]['title'] == tail_str][0]
-                i['head'] = [i for i in range(len(objects)) if objects[i]['title'] == head_str][0]
+                # i['tail'] = [i for i in range(len(objects)) if objects[i]['title'] == tail_str][0]
+                # i['head'] = [i for i in range(len(objects)) if objects[i]['title'] == head_str][0]
+
+                i['tail'] = [i for i in range(len(objects)) if objects[i]['title'] in tail_str][0]
+                i['head'] = [i for i in range(len(objects)) if objects[i]['title'] in head_str][0]
+
                 edges.append(i)
         return {
             'objects':objects,
@@ -368,16 +376,33 @@ def get_gv_json(name):
                                                                     show_controller=True
                                                                     )
    
-    # gv = pnl_container.pnl_objects['compositions'][comp].show_graph(output_fmt='gv',
-    #                                                                 show_learning=True,
-    #                                                                 show_controller=True,
-    #                                                                 show_node_structure='ALL'
-    #                                                                 )
+    gv_all = pnl_container.pnl_objects['compositions'][comp].show_graph(output_fmt='gv',
+                                                                    show_learning=True,
+                                                                    show_controller=True,
+                                                                    show_node_structure='ALL'
+                                                                    )
 
     gv_svg = gv.pipe(format='svg')
+
+    gv_all_svg = gv_all.pipe(format='svg')
+
+
     gv_svg_dict = etree_to_dict(fromstring(gv_svg.decode()))
+    
+    gv_all_svg_dict = etree_to_dict(fromstring(gv_all_svg.decode()))
+    
+
     correct_dict(gv_svg_dict)
-    gv_d = parse_corrected_dict(gv_svg_dict)
+    print_to_file("gv_svg_dict\n\n" + json.dumps(gv_svg_dict, indent=4) + "\n\n")
+
+    correct_dict(gv_all_svg_dict)
+    print_to_file("gv_all_svg_dict\n\n" + json.dumps(gv_all_svg_dict, indent=4))
+
+
+    # gv_d = parse_corrected_dict(gv_svg_dict)
+
+    gv_d = parse_corrected_dict(gv_all_svg_dict)
+
     gv_d['maxX'] = float(gv_svg_dict['svg']['width'].replace('pt',''))
     gv_d['maxY'] = float(gv_svg_dict['svg']['height'].replace('pt', ''))
     return gv_d
