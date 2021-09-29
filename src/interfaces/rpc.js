@@ -10,6 +10,8 @@ const log = require('electron-log'),
 class RPCInterface{
     constructor() {
 
+        // debugging config bug on other machines
+        console.log("ifs.getConfig() is : " + JSON.stringify(ifs.getConfig(), null, 4));
         console.log("ifs.getConfig()['Python']['PsyNeuLink Path'] is : " + ifs.getConfig()['Python']['PsyNeuLink Path']);
 
         const PROTO_PATH = path.join(ifs.getConfig()['Python']['PsyNeuLink Path'], 'psyneulink/core/rpc/graph.proto');
